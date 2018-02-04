@@ -1,5 +1,3 @@
-
-
 """""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""
@@ -27,13 +25,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'nvie/vim-flake8'
 " Solarized colorscheme
 Plug 'altercation/vim-colors-solarized'
+Plug 'JulioJu/neovim-qt-colors-solarized-truecolor-only'
 " Monokai colorsheme
 Plug 'crusoexia/vim-monokai'
 " Status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
-
 
 """""""""""""""""""""""""""
 " Deoplete
@@ -58,7 +56,14 @@ filetype plugin indent on
 syntax on
 set encoding=utf-8
 
-#Set path to python virtual environments with neovim packages installed
-let g:python_host_prog = '/full/path/to/neovim2/bin/python'
-let g:python3_host_prog = '/full/path/to/neovim3/bin/python'
+"Set colorscheme solarized"
+"syntax enable
+"set background=dark
+"colorscheme solarized
 
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set background=dark " or dark
+colorscheme solarized_nvimqt
+
+
+let g:python3_host_prog='C:\Anaconda3\python.exe'
