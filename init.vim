@@ -9,7 +9,6 @@
 "================================================= 
 ""               Plugins
 "================================================= 
-
 " Plugins will go here in the middle.
 call plug#begin('~/.local/share/nvim/plugged')
 " Auto complete plugins
@@ -22,6 +21,8 @@ else
 endif
 " Python completion integrated in deoplete
 Plug 'zchee/deoplete-jedi'
+" Support for virtualenv
+Plug 'plytophogy/vim-virtualenv'
 " Syntax checker (supports Python)
 Plug 'w0rp/ale'
 " File explorer
