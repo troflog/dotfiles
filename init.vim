@@ -10,6 +10,7 @@
 ""               Plugins
 "================================================= 
 " Plugins will go here in the middle.
+
 call plug#begin('~/.local/share/nvim/plugged')
 " Auto complete plugins
 if has('nvim')
@@ -19,6 +20,7 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
+
 " Python completion integrated in deoplete
 Plug 'zchee/deoplete-jedi'
 " Support for virtualenv
@@ -31,6 +33,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " Solarized colorscheme
+Plug 'iCyMind/NeoSolarized'
 Plug 'altercation/vim-colors-solarized'
 " Solarized colorscheme with neovim-qt support
 Plug 'JulioJu/neovim-qt-colors-solarized-truecolor-only'
@@ -51,11 +54,7 @@ set autoindent
 " syntax highlighting
 syntax enable
 " vim will try to use colors that look good on a dark background
-set background=dark
-" use solarized as colorscheme
-colorscheme solarized
-" number of colors vim can use for solarized
-let g:solarized_termcolors=256
+
 " display line number relatively to the current one
 set rnu
 " highlight the current line and column
@@ -72,6 +71,29 @@ set shiftwidth=4
 set mouse=a
 " disable text wrapping
 set textwidth=0
+
+"============================
+" Colorscheme
+"============================
+
+" use solarized as colorscheme
+" colorscheme kalisi "solarized
+set termguicolors
+" default value is "normal", Setting this option to "high" or "low" does use the 
+" same Solarized palette but simply shifts some values up or down in order to 
+" expand or compress the tonal range displayed.
+let g:neosolarized_contrast = "normal"
+
+" Special characters such as trailing whitespace, tabs, newlines, when displayed 
+" using ":set list" can be set to one of three levels depending on your needs. 
+" Default value is "normal". Provide "high" and "low" options.
+let g:neosolarized_visibility = "normal"
+
+" I make vertSplitBar a transparent background color. If you like the origin solarized vertSplitBar
+" style more, set this value to 0.
+let g:neosolarized_vertSplitBgTrans = 1
+set background=dark
+colorscheme NeoSolarized
 
 "============================
 " Basic Mappings
@@ -151,8 +173,8 @@ map <C-A> :NERDTreeToggle<CR>
 "=====================================================
 
 "Path to python virtualenv where neovim is install
-"Not used since I have install neovim with pip3 install --user neovim
-"let g:python3_host_prog='C:\Anaconda3\python.exe'
+let g:python_host_prog = '/home/tbf/.vens/neovim2/bin/python'
+let g:python3_host_prog = '/home/tbf/.vens/neovim3/bin/python'
 let python_highlight_all = 1
 nmap <silent> <C-m> <Plug>(pydocstring)
 
