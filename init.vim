@@ -53,8 +53,8 @@ set encoding=utf-8
 set autoindent
 " syntax highlighting
 syntax enable
-" vim will try to use colors that look good on a dark background
-
+" Copies using system clipboard
+set clipboard+=unnamedplus
 " display line number relatively to the current one
 set rnu
 " highlight the current line and column
@@ -146,9 +146,9 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 "========================
 " default setting of 'laststatus' is for the statusline to not appear until a split is created,
 " set to 2 to appear all the time
-set laststatus=2
+"set laststatus=2
 " use powerline font (need manual install)
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
 
 "========================
 " NerdTree
@@ -173,8 +173,8 @@ map <C-A> :NERDTreeToggle<CR>
 "=====================================================
 
 "Path to python virtualenv where neovim is install
-let g:python_host_prog = '/home/tbf/.vens/neovim2/bin/python'
-let g:python3_host_prog = '/home/tbf/.vens/neovim3/bin/python'
+"let g:python_host_prog = '/home/tbf/anaconda3/envs/neovim2/bin/python'
+"let g:python3_host_prog = '/home/tbf/anaconda3/envs/neovim3/bin/python'
 let python_highlight_all = 1
 nmap <silent> <C-m> <Plug>(pydocstring)
 
