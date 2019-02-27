@@ -100,19 +100,23 @@ colorscheme NeoSolarized
 "============================
 " make jk to be esc
 inoremap jk <ESC>
-" change the leader key to space
-let mapleader =","   " \<Space> is another alternative
-" relative numbering"
-nnoremap <F4> :set relativenumber!<CR>
 " splits behaviour
 set splitbelow
 set splitright
-" movment between splits"
-nnoremap <C-J> <C-W><C-J> "Ctrl-j move to the split below
-nnoremap <C-K> <C-W><C-K> "Ctrl-k move to the split above
-nnoremap <C-L> <C-W><C-L> "Ctrl-l move to the split to the right
-nnoremap <C-H> <C-W><C-H> "Ctrl-h move to the split to the left
+"
+" set moving between windows to ctrl+hjkl
+noremap <silent> <C-l> <C-w>l
+noremap <silent> <C-h> <C-w>h
+noremap <silent> <C-k> <C-w>k
+noremap <silent> <C-j> <C-w>j
 
+
+" make it easy to leave terminal
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+:au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 "============================
 " Auto commands
 "============================
@@ -138,8 +142,8 @@ map <Leader> <Plug>(easymotion-prefix)
 "========================"
 " Ale
 "========================"
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <C-W>k <Plug>(ale_previous_wrap)
+nmap <silent> <C-W>j <Plug>(ale_next_wrap)
 
 "========================
 " Airline
