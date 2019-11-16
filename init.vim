@@ -177,9 +177,14 @@ map <C-A> :NERDTreeToggle<CR>
 "=====================================================
 
 "Path to python virtualenv where neovim is install
-"let g:python_host_prog = '/home/tbf/anaconda3/envs/neovim2/bin/python'
-"let g:python3_host_prog = '/home/tbf/anaconda3/envs/neovim3/bin/python'
+let g:deoplete#enable_at_startup=1
+let g:deoplete#auto_complete=1
+let g:python_host_prog = '/home/tbf/miniconda3/envs/neovim2/bin/python'
+let g:python3_host_prog = expand('~/miniconda3/envs/neovim3/bin/python3')
+let g:deoplete#sources#jedi#python_path = 'python3'
+
 let python_highlight_all = 1
+
 nmap <silent> <C-m> <Plug>(pydocstring)
 
 "========================
