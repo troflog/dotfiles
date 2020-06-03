@@ -30,8 +30,6 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
-
-
 filetype plugin on
 
 "================================================
@@ -53,7 +51,7 @@ set smartindent
 " syntax highlighting
 syntax enable
 " Copies using system clipboard
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 " display line number relatively to the current one
 set rnu
 " highlight the current line and column
