@@ -25,8 +25,12 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'c.vim'
-Plugin 'valloric/youcompleteme'
-
+Plugin 'oblitum/youcompleteme'
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
+Plugin 'preservim/nerdtree'
+Plugin 'patstockwell/vim-monokai-tasty'
+Plugin 'morhetz/gruvbox' 
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -68,9 +72,15 @@ set shiftwidth=4
 set mouse=a
 " disable text wrapping
 set textwidth=0
+"Color scheme
+"colorscheme vim-monokai-tasty
+autocmd vimenter * ++nested colorscheme gruvbox
+set bg=dark
 
-
-"============================
+"close NERDTree if only nerdtree is open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+map <C-n> :NERDTreeToggle<CR>
+"===========================
 " Basic Mappings
 "============================
 
@@ -80,9 +90,10 @@ inoremap jk <ESC>
 set splitbelow
 set splitright
 " map leader
-"let mapleader = ","
+let mapleader = ","
+"Map fzf to ;
+map ; :Files<CR>
 
-"
 " set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
 noremap <silent> <C-h> <C-w>h
@@ -91,11 +102,13 @@ noremap <silent> <C-j> <C-w>j
 
 
 " make it easy to leave terminal
-"Remove this since it not working in Lubunut
-"tnoremap <C-h> <C-\><C-n><C-w>h
-"tnoremap <C-j> <C-\><C-n><C-w>j
-"tnoremap <C-k> <C-\><C-n><C-w>k
-"tnoremap <C-l> <C-\><C-n><C-w>l
+" by first leaving insert mode and 
+" before the moving between windows
+" command
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 :au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 "============================
 " Auto commands
