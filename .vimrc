@@ -31,6 +31,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'preservim/nerdtree'
 Plugin 'patstockwell/vim-monokai-tasty'
 Plugin 'morhetz/gruvbox' 
+Plugin 'Lokaltog/vim-easymotion'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -80,6 +81,8 @@ set bg=dark
 "close NERDTree if only nerdtree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <C-n> :NERDTreeToggle<CR>
+"make ycm completion menu inside comments
+let g:ycm_complete_in_comments = 1 
 "===========================
 " Basic Mappings
 "============================
