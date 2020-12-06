@@ -83,6 +83,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 map <C-n> :NERDTreeToggle<CR>
 "make ycm completion menu inside comments
 let g:ycm_complete_in_comments = 1 
+"Trigger autocomplete after typing two letters
+let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ] }
+"Need to point to this file in order to use autocomplete in c
+let g:ycm_global_ycm_extra_conf = '/home/tbf/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py' 
 "===========================
 " Basic Mappings
 "============================
