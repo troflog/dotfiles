@@ -24,7 +24,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'c.vim'
+"Do not like this
+"Plugin 'c.vim'
 Plugin 'oblitum/youcompleteme'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
@@ -77,6 +78,9 @@ set textwidth=0
 "colorscheme vim-monokai-tasty
 autocmd vimenter * ++nested colorscheme gruvbox
 set bg=dark
+" splits behaviour
+set splitbelow
+set splitright
 
 "close NERDTree if only nerdtree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -93,13 +97,20 @@ let g:ycm_global_ycm_extra_conf = '/home/tbf/.vim/bundle/youcompleteme/third_par
 
 " make jk to be esc
 inoremap jk <ESC>
-" splits behaviour
-set splitbelow
-set splitright
 " map leader
-let mapleader = ","
+let mapleader=","
 "Map fzf to ;
 map ; :Files<CR>
+
+" Use Enter or <C-L> to clear highlighting
+nnoremap <silent> <CR> :let @/=""<CR><CR>
+nnoremap <silent> <C-L> :let @/=""<CR><C-L>
+
+
+" Use Ctrl+Tab / Ctrl+Shift+Tab to cycle through buffers
+map gn :bn<cr>
+map gp :bp<cr>
+map gd :bd<cr>  
 
 " set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
