@@ -46,7 +46,6 @@ filetype plugin on
 
 "highlight all search pattern matches
 set hlsearch
-
 " turn filetype detection, indent scripts and filetype plugins on
 filetype plugin indent on
 set encoding=utf-8
@@ -60,7 +59,7 @@ syntax enable
 " Copies using system clipboard
 set clipboard=unnamedplus
 " display line number relatively to the current one
-set rnu
+set number relativenumber
 " highlight the current line and column
 "set cursorline
 "set cursorcolumn
@@ -74,26 +73,22 @@ set shiftwidth=4
 set mouse=a
 " disable text wrapping
 set textwidth=0
-"Color scheme
-"colorscheme vim-monokai-tasty
-autocmd vimenter * ++nested colorscheme gruvbox
-set bg=dark
 " splits behaviour
 set splitbelow
 set splitright
-" Termdebug 
-let g:termdebug_popup = 0
-let g:termdebug_wide = 163
-
-"close NERDTree if only nerdtree is open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-map <C-n> :NERDTreeToggle<CR>
-"make ycm completion menu inside comments
-let g:ycm_complete_in_comments = 1 
-"Trigger autocomplete after typing two letters
-let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ] }
-"Need to point to this file in order to use autocomplete in c
-let g:ycm_global_ycm_extra_conf = '/home/tbf/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window.
+  set lines=999 columns=999
+else
+  " This is console Vim.
+  if exists("+lines")
+    set lines=45
+  endif
+  if exists("+columns")
+    set columns=100
+  endif
+endif
 "===========================
 " Basic Mappings
 "============================
@@ -104,17 +99,15 @@ inoremap jk <ESC>
 let mapleader=","
 "Map fzf to ;
 map ; :Files<CR>
-
+"This unsets the "last search pattern" register by hitting return
+nnoremap <CR> :noh<CR><CR>
 " Use Enter or <C-L> to clear highlighting
 nnoremap <silent> <CR> :let @/=""<CR><CR>
 nnoremap <silent> <C-L> :let @/=""<CR><C-L>
-
-
 " Use Ctrl+Tab / Ctrl+Shift+Tab to cycle through buffers
 map gn :bn<cr>
 map gp :bp<cr>
 map gd :bd<cr>  
-
 " Set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
 noremap <silent> <C-h> <C-w>h
@@ -125,7 +118,35 @@ tnoremap <silent> <C-l> <C-w>l
 tnoremap <silent> <C-h> <C-w>h
 tnoremap <silent> <C-k> <C-w>k
 tnoremap <silent> <C-j> <C-w>j
+"Toggle nerdtree on/off with Ctrl+n
+map <C-n> :NERDTreeToggle<CR>
 
+"close NERDTree if only nerdtree is open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"============================
+" Plugin settings
+"============================
+
+"Color scheme
+"colorscheme vim-monokai-tasty
+autocmd vimenter * ++nested colorscheme gruvbox
+set bg=dark
+
+" Termdebug 
+let g:termdebug_popup = 0
+let g:termdebug_wide = 163
+
+" Youcompleteme
+" Use the first python executable it finds in PATH
+let g:ycm_python_binary_path = 'python'
+" Close prewview window after the user exit insert modus
+let g:ycm_autoclose_preview_window_after_insertion = 1
+"Make ycm completion menu inside comments
+let g:ycm_complete_in_comments = 1 
+"Trigger autocomplete after typing two letters
+let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ],'python': [ 're!\w{2}' ]} "Need to point to this file in order to use autocomplete in c
+let g:ycm_global_ycm_extra_conf = '/home/tbf/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 "============================
 " Auto commands
@@ -134,7 +155,6 @@ tnoremap <silent> <C-j> <C-w>j
 " need to be disabled for some filetypes like markdown or latex
 " where trailing spaces are important
 autocmd FileType c,cpp,java,python,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
-
 
 
 "Set cursor type mode depenend
