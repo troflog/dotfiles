@@ -33,6 +33,7 @@ Plugin 'preservim/nerdtree'
 Plugin 'patstockwell/vim-monokai-tasty'
 Plugin 'morhetz/gruvbox' 
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'hanschen/vim-ipython-cell'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -79,7 +80,7 @@ set splitright
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
-  set lines=999 columns=999
+  set lines=60 columns=120
 else
   " This is console Vim.
   if exists("+lines")
@@ -104,9 +105,10 @@ nnoremap <CR> :noh<CR><CR>
 " Use Enter or <C-L> to clear highlighting
 nnoremap <silent> <CR> :let @/=""<CR><CR>
 nnoremap <silent> <C-L> :let @/=""<CR><C-L>
-" Use Ctrl+Tab / Ctrl+Shift+Tab to cycle through buffers
+" Use gn or gp through buffers
 map gn :bn<cr>
 map gp :bp<cr>
+" Use gd to delete buffer
 map gd :bd<cr>  
 " Set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
@@ -169,3 +171,6 @@ let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 
+"Test
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
