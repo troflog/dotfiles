@@ -10,8 +10,6 @@
 "               Plugins
 "================================================= 
 
-
-
 " Plugins will go here in the middle.
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -34,6 +32,7 @@ Plugin 'patstockwell/vim-monokai-tasty'
 Plugin 'morhetz/gruvbox' 
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'hanschen/vim-ipython-cell'
+Plugin 'preservim/nerdcommenter'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -43,7 +42,6 @@ filetype plugin on
 "================================================
 " Basic Settings
 "================================================
-
 
 "highlight all search pattern matches
 set hlsearch
@@ -90,6 +88,7 @@ else
     set columns=100
   endif
 endif
+
 "===========================
 " Basic Mappings
 "============================
@@ -122,9 +121,24 @@ tnoremap <silent> <C-k> <C-w>k
 tnoremap <silent> <C-j> <C-w>j
 "Toggle nerdtree on/off with Ctrl+n
 map <C-n> :NERDTreeToggle<CR>
-
 "close NERDTree if only nerdtree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"Mapping unused norvegian letters
+"in normal mode to letters with
+"are difficult to type on a
+"norwegian keyboard
+nnoremap ø (
+nnoremap æ )
+nnoremap Ø {
+nnoremap Æ }
+nnoremap å 0
+nnoremap Å $
+vnoremap ø (
+vnoremap æ )
+vnoremap Ø {
+vnoremap Æ }
+vnoremap å \
+vnoremap Å `
 
 "============================
 " Plugin settings
@@ -153,12 +167,11 @@ let g:ycm_global_ycm_extra_conf = '/home/tbf/.vim/bundle/youcompleteme/third_par
 "============================
 " Auto commands
 "============================
+"
 " remove blank characters at the end of every line when saving file,
 " need to be disabled for some filetypes like markdown or latex
 " where trailing spaces are important
 autocmd FileType c,cpp,java,python,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
-
-
 "Set cursor type mode depenend
 "Cursor settings:
 "  1 -> blinking block
@@ -171,6 +184,6 @@ let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 
-"Test
+"Execute Python
 autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
