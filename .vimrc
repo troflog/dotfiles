@@ -99,16 +99,15 @@ inoremap jk <ESC>
 let mapleader=","
 "Map fzf to ;
 map ; :Files<CR>
-"This unsets the "last search pattern" register by hitting return
-nnoremap <CR> :noh<CR><CR>
-" Use Enter or <C-L> to clear highlighting
-nnoremap <silent> <CR> :let @/=""<CR><CR>
-nnoremap <silent> <C-L> :let @/=""<CR><C-L>
 " Use gn or gp through buffers
 map gn :bn<cr>
 map gp :bp<cr>
 " Use gd to delete buffer
 map gd :bd<cr>  
+"Clear search result shortcut
+nnoremap <C-P> :noh<CR>
+"Save and source vimrc with one command
+nnoremap <F12> :w<CR>:so $MYVIMRC<CR>
 " Set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
 noremap <silent> <C-h> <C-w>h
@@ -139,7 +138,6 @@ vnoremap Ø {
 vnoremap Æ }
 vnoremap å \
 vnoremap Å `
-
 "============================
 " Plugin settings
 "============================
