@@ -99,7 +99,7 @@ inoremap jk <ESC>
 let mapleader=","
 "Map fzf to ;
 map ; :Files<CR>
-" Use gn or gp through buffers
+" Use gn or gp to move forward/backwards through buffers
 map gn :bn<cr>
 map gp :bp<cr>
 " Use gd to delete buffer
