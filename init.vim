@@ -1,16 +1,16 @@
-"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-"
-"
-"                        MY NEOVIM VIMRC FILE                             
-"
-"
-"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                "
+"                                                "
+"         MY NEOVIM VIMRC FILE                   "
+"                                                "
+"                                                "
+""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "================================================= 
 ""               Plugins
 "================================================= 
-" Plugins will go here in the middle.
 
+" Plugins will go here in the middle.
 call plug#begin('~/.local/share/nvim/plugged')
 " Auto complete plugins
 if has('nvim')
@@ -83,13 +83,9 @@ set termguicolors
 " same Solarized palette but simply shifts some values up or down in order to 
 " expand or compress the tonal range displayed.
 let g:neosolarized_contrast = "normal"
-
 " Special characters such as trailing whitespace, tabs, newlines, when displayed 
 " using ":set list" can be set to one of three levels depending on your needs. 
 " Default value is "normal". Provide "high" and "low" options.
-let g:neosolarized_visibility = "normal"
-
-" I make vertSplitBar a transparent background color. If you like the origin solarized vertSplitBar
 " style more, set this value to 0.
 let g:neosolarized_vertSplitBgTrans = 1
 set background=dark
@@ -103,20 +99,31 @@ inoremap jk <ESC>
 " splits behaviour
 set splitbelow
 set splitright
-"
+"Map leader to ,
+let mapleader=","
+"Map fzf to ;
+map ; :Files<CR>
+" Use gn or gp through buffers
+map gn :bn<cr>
+map gp :bp<cr>
+" Use gd to delete buffer
+map gd :bd<cr>  
+"Clear search result shortcut
+nnoremap <C-P> :noh<CR><C-L>
+"Save and source vimrc with one command
+nnoremap <F12> :so $MYVIMRC<CR>
 " set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
 noremap <silent> <C-h> <C-w>h
 noremap <silent> <C-k> <C-w>k
 noremap <silent> <C-j> <C-w>j
-
-
 " make it easy to leave terminal
 tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
 :au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
 "============================
 " Auto commands
 "============================
@@ -125,34 +132,33 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 " where trailing spaces are important
 autocmd FileType c,cpp,java,python,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
 
-"================================================
+"========================
 " Deoplete Settings
-"================================================
+"=======================
 
 let g:deoplete#enable_at_startup = 1
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
+"Path to python virtualenv where neovim is install
+let g:deoplete#enable_at_startup=1
+let g:deoplete#auto_complete=1
+let g:python_host_prog = '/home/tbf/miniconda3/envs/neovim2/bin/python'
+let g:python3_host_prog = expand('~/miniconda3/envs/neovim3/bin/python3')
+let g:deoplete#sources#jedi#python_path = 'python3'
+let python_highlight_all = 1
+nmap <silent> <C-m> <Plug>(pydocstring)
 
 ""========================
 " Easymotion
-"========================"
+"========================
 map <Leader> <Plug>(easymotion-prefix)
 
-"========================"
+"========================
 " Ale
-"========================"
+"========================
 nmap <silent> <C-W>k <Plug>(ale_previous_wrap)
 nmap <silent> <C-W>j <Plug>(ale_next_wrap)
-
-"========================
-" Airline
-"========================
-" default setting of 'laststatus' is for the statusline to not appear until a split is created,
-" set to 2 to appear all the time
-"set laststatus=2
-" use powerline font (need manual install)
-"let g:airline_powerline_fonts = 1
 
 "========================
 " NerdTree
@@ -171,21 +177,6 @@ function! s:CloseIfOnlyNerdTreeLeft()
 endfunction
 " toggle file explorer visibility
 map <C-A> :NERDTreeToggle<CR>
-
-"=====================================================
-"" Python settings
-"=====================================================
-
-"Path to python virtualenv where neovim is install
-let g:deoplete#enable_at_startup=1
-let g:deoplete#auto_complete=1
-let g:python_host_prog = '/home/tbf/miniconda3/envs/neovim2/bin/python'
-let g:python3_host_prog = expand('~/miniconda3/envs/neovim3/bin/python3')
-let g:deoplete#sources#jedi#python_path = 'python3'
-
-let python_highlight_all = 1
-
-nmap <silent> <C-m> <Plug>(pydocstring)
 
 "========================
 " Jedi

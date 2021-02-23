@@ -95,6 +95,9 @@ endif
 
 " make jk to be esc
 inoremap jk <ESC>
+" splits behaviour
+set splitbelow
+set splitright
 " map leader
 let mapleader=","
 "Map fzf to ;
@@ -105,9 +108,9 @@ map gp :bp<cr>
 " Use gd to delete buffer
 map gd :bd<cr>  
 "Clear search result shortcut
-nnoremap <C-P> :noh<CR>
+nnoremap <C-P> :noh<CR><C-L>
 "Save and source vimrc with one command
-nnoremap <F12> :w<CR>:so $MYVIMRC<CR>
+nnoremap <F12> :so $MYVIMRC<CR>
 " Set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
 noremap <silent> <C-h> <C-w>h
