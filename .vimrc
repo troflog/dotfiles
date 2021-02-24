@@ -166,8 +166,22 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 "Make ycm completion menu inside comments
 let g:ycm_complete_in_comments = 1 
 "Trigger autocomplete after typing two letters
-let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ],'python': [ 're!\w{2}' ]} "Need to point to this file in order to use autocomplete in c
+let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ],'python': [ 're!\w{2}' ]}
+"Need to point to this file in order to use autocomplete in c
 let g:ycm_global_ycm_extra_conf = '/home/tbf/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+" List of filetypes for which YCM should be turned off
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar': 1,
+      \ 'notes': 1,
+      \ 'markdown': 1,
+      \ 'netrw': 1,
+      \ 'unite': 1,
+      \ 'vimwiki': 1,
+      \ 'pandoc': 1,
+      \ 'infolog': 1,
+      \ 'leaderf': 1,
+      \ 'mail': 1
+      \}
 
 " UltiSnips   
 " Snippet triggering commands

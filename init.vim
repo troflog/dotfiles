@@ -13,17 +13,16 @@
 " Plugins will go here in the middle.
 call plug#begin('~/.local/share/nvim/plugged')
 " Auto complete plugins
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-
+ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Python completion integrated in deoplete
 Plug 'zchee/deoplete-jedi'
-" Support for virtualenv
+"Jedi vim
+Plug 'davidhalter/jedi-vim'
+"C-family completion
+Plug 'zchee/deoplete-clang'
+"  Support for virtualenv
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'plytophogy/vim-virtualenv'
 " Syntax checker (supports Python)
 Plug 'w0rp/ale'
@@ -145,11 +144,17 @@ inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
 "Path to python virtualenv where neovim is install
 let g:deoplete#enable_at_startup=1
 let g:deoplete#auto_complete=1
-let g:python_host_prog = '/home/tbf/miniconda3/envs/neovim2/bin/python'
-let g:python3_host_prog = expand('~/miniconda3/envs/neovim3/bin/python3')
+let g:python_host_prog =  '/home/tbf/miniconda3/envs/neovim/bin/python'
+let g:python3_host_prog = '/home/tbf/miniconda3/envs/neovim3/bin/python'
 let g:deoplete#sources#jedi#python_path = 'python3'
 let python_highlight_all = 1
 nmap <silent> <C-m> <Plug>(pydocstring)
+
+"========================
+" Deoplete clang 
+"========================
+let g:deoplete#sources#clang#libclang_path ='/usr/lib/llvm-10/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
 
 "========================
 " UltiSnips   
@@ -188,7 +193,7 @@ function! s:CloseIfOnlyNerdTreeLeft()
 	endif
 endfunction
 " toggle file explorer visibility
-map <C-A> :NERDTreeToggle<CR>
+map <C-N> :NERDTreeToggle<CR>
 
 "========================
 " Jedi
