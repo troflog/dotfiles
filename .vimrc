@@ -33,7 +33,6 @@ Plugin 'morhetz/gruvbox'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'hanschen/vim-ipython-cell'
 Plugin 'preservim/nerdcommenter'
-"Snippsets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 call vundle#end()            " required

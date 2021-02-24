@@ -40,6 +40,8 @@ Plug 'JulioJu/neovim-qt-colors-solarized-truecolor-only'
 " Status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 "================================================
@@ -149,7 +151,17 @@ let g:deoplete#sources#jedi#python_path = 'python3'
 let python_highlight_all = 1
 nmap <silent> <C-m> <Plug>(pydocstring)
 
-""========================
+"========================
+" UltiSnips   
+"========================
+
+" Snippet triggering commands
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsEditSplit="vertical"
+
+"========================
 " Easymotion
 "========================
 map <Leader> <Plug>(easymotion-prefix)
