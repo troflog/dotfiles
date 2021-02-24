@@ -33,11 +33,16 @@ Plugin 'morhetz/gruvbox'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'hanschen/vim-ipython-cell'
 Plugin 'preservim/nerdcommenter'
+"Snippsets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 filetype plugin on
+" Test area
+" Track the engine.
 
 "================================================
 " Basic Settings
@@ -164,6 +169,13 @@ let g:ycm_complete_in_comments = 1
 "Trigger autocomplete after typing two letters
 let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ],'python': [ 're!\w{2}' ]} "Need to point to this file in order to use autocomplete in c
 let g:ycm_global_ycm_extra_conf = '/home/tbf/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+" UltiSnips   
+" Snippet triggering commands
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsEditSplit="vertical"
 
 "============================
 " Auto commands
