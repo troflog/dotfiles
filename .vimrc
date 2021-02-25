@@ -35,6 +35,9 @@ Plugin 'hanschen/vim-ipython-cell'
 Plugin 'preservim/nerdcommenter'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'habamax/vim-sendtoterm'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:

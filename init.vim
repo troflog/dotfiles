@@ -41,6 +41,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Send to terminal
+Plug 'habamax/vim-sendtoterm'
+Plug'junegunn/fzf.vim'
 call plug#end()
 
 "================================================
@@ -169,7 +173,7 @@ let g:UltiSnipsEditSplit="vertical"
 "========================
 " Easymotion
 "========================
-map <Leader> <Plug>(easymotion-prefix)
+"map <Leader> <Plug>(easymotion-prefix)
 
 "========================
 " Ale
