@@ -216,3 +216,5 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 "Execute Python
 autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+"Compile and run C
+autocmd filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>

@@ -203,3 +203,29 @@ map <C-N> :NERDTreeToggle<CR>
 " Jedi
 "========================
 let g:jedi#auto_close_doc = 0  " close scratch/preview window after completion
+
+"============================
+" Auto commands
+"============================
+"
+" remove blank characters at the end of every line when saving file,
+" need to be disabled for some filetypes like markdown or latex
+" where trailing spaces are important
+autocmd FileType c,cpp,java,python,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
+"Set cursor type mode depenend
+"Cursor settings:
+"  1 -> blinking block
+"  2 -> solid block
+"  3 -> blinking underscore
+"  4 -> solid underscore
+"  5 -> blinking vertical bar
+"  6 -> solid vertical bar
+let &t_SI.="\e[5 q" "SI = INSERT mode
+let &t_SR.="\e[4 q" "SR = REPLACE mode
+let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
+
+"Execute Python
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+"Compile and run C
+autocmd filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
