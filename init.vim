@@ -18,6 +18,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'zchee/deoplete-jedi'
 "Jedi vim
 Plug 'davidhalter/jedi-vim'
+" Easy motion
+Plug 'Lokaltog/vim-easymotion'
 "C-family completion
 Plug 'zchee/deoplete-clang'
 "  Support for virtualenv
@@ -45,6 +47,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "Send to terminal
 Plug 'habamax/vim-sendtoterm'
 Plug'junegunn/fzf.vim'
+" Easy insert comment
+Plug 'preservim/nerdcommenter'
 call plug#end()
 
 "================================================
@@ -129,6 +133,22 @@ tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
 :au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
+"Mapping unused norvegian letters
+"in normal mode to letters with
+"are difficult to type on a
+"norwegian keyboard
+nnoremap ø (
+nnoremap æ )
+nnoremap Ø {
+nnoremap Æ }
+nnoremap å 0
+nnoremap Å $
+vnoremap ø (
+vnoremap æ )
+vnoremap Ø {
+vnoremap Æ }
+vnoremap å \
+vnoremap Å `
 "============================
 " Auto commands
 "============================
