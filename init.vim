@@ -49,6 +49,8 @@ Plug 'habamax/vim-sendtoterm'
 Plug'junegunn/fzf.vim'
 " Easy insert comment
 Plug 'preservim/nerdcommenter'
+" Easy console
+
 call plug#end()
 
 "================================================

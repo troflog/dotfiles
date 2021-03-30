@@ -35,12 +35,12 @@ Plugin 'hanschen/vim-ipython-cell'
 Plugin 'preservim/nerdcommenter'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'lervag/vimtex'
 Plugin 'habamax/vim-sendtoterm'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
 "filetype plugin on
 filetype plugin on
 " Test area
@@ -169,9 +169,9 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 "Make ycm completion menu inside comments
 let g:ycm_complete_in_comments = 1 
 "Trigger autocomplete after typing two letters
-let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ],'python': [ 're!\w{2}' ]}
+"let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ],'python': [ 're!\w{2}' ]}
 "Need to point to this file in order to use autocomplete in c
-let g:ycm_global_ycm_extra_conf = '/home/tbf/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/dotfiles/.ycm_extra_conf.py'
 " List of filetypes for which YCM should be turned off
 let g:ycm_filetype_blacklist = {
       \ 'tagbar': 1,
@@ -189,9 +189,11 @@ let g:ycm_filetype_blacklist = {
 " UltiSnips   
 " Snippet triggering commands
 let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-n>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsListSnippets='<C-b>'
 let g:UltiSnipsEditSplit="vertical"
+"let g:UltiSnipsUsePythonVersion = 2
 
 "============================
 " Auto commands
@@ -218,3 +220,61 @@ autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%,
 autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 "Compile and run C
 autocmd filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
+
+
+
+"============================
+" Test zone 
+"============================
+
+
+let s:term_buf_nr = -1
+function! s:ToggleTerminal() abort
+    if s:term_buf_nr == -1
+        execute "botright terminal"
+        let s:term_buf_nr = bufnr("$")
+    else
+        try
+            execute "bdelete! " . s:term_buf_nr
+        catch
+            let s:term_buf_nr = -1
+            call <SID>ToggleTerminal()
+            return
+        endtry
+        let s:term_buf_nr = -1
+    endif
+endfunction
+
+
+"tnoremap <silent> <Leader>t <C-w>N:call <SID>ToggleTerminal()<CR>
+nnoremap <silent><leader>t           :call ToggleTerminalDrawer()<CR>
+tnoremap <silent><leader>t   <C-w>N:call ToggleTerminalDrawer()<CR>
+
+let g:terminal_drawer = { 'win_id': v:null, 'buffer_id': v:null }
+function! ToggleTerminalDrawer() abort
+  if win_gotoid(g:terminal_drawer.win_id)
+    hide
+    set laststatus=2 showmode ruler
+  else
+    if !g:terminal_drawer.buffer_id
+      botright call term_start($SHELL)
+      let g:terminal_drawer.buffer_id = bufnr("$")
+    else
+      execute 'botright sbuffer' . g:terminal_drawer.buffer_id
+      exec 'normal! i'
+    endif
+
+    exec "resize" float2nr(&lines * 0.25)
+    setlocal laststatus=0 noshowmode noruler
+    setlocal nobuflisted
+    let g:terminal_drawer.win_id = win_getid()
+
+  endif
+endfunction
+
+function! RemoveEmptyBuffers()
+  let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val)<0 && !getbufvar(v:val, "&mod")')
+  if !empty(buffers)
+      silent exe 'bw ' . join(buffers, ' ')
+  endif
+endfunction
