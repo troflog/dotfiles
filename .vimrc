@@ -117,7 +117,7 @@ map gd :bd<cr>
 "Clear search result shortcut
 nnoremap <C-P> :noh<CR><C-L>
 "Save and source vimrc with one command
-nnoremap <F12> :so $MYVIMRC<CR>
+nnoremap <F12> :w <bar> :so $MYVIMRC<CR>
 " Set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
 noremap <silent> <C-h> <C-w>h
@@ -226,37 +226,95 @@ autocmd filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
 "============================
 " Test zone 
 "============================
-
-
-"tnoremap <silent> <Leader>t <C-w>N:call <SID>ToggleTerminal()<CR>
-nnoremap <silent><leader>t            :call ToggleTerminalDrawer()<CR>
-tnoremap <silent><leader>t     <C-w>N:call ToggleTerminalDrawer()<CR>
-
-let g:terminal_drawer = { 'win_id': v:null, 'buffer_id': v:null }
-function! ToggleTerminalDrawer() abort
-  if win_gotoid(g:terminal_drawer.win_id)
-    hide
-    set laststatus=2 showmode ruler
+function! PutTermPanel(buf, side, size) abort
+  " new term if no buffer
+  if a:buf == 0
+    term
   else
-    if !g:terminal_drawer.buffer_id
-      botright call term_start($SHELL)
-      let g:terminal_drawer.buffer_id = bufnr("$")
+    execute "sp" bufname(a:buf)
+  endif
+  " default side if wrong argument
+  if stridx("hjklHJKL", a:side) == -1
+    execute "wincmd" "J"
+  else
+    execute "wincmd" a:side
+  endif
+  " horizontal split resize
+  if stridx("jkJK", a:side) >= 0
+    if ! a:size > 0
+      resize 6
     else
-      execute 'botright sbuffer' . g:terminal_drawer.buffer_id
-      exec 'normal! i'
+      execute "resize" a:size
     endif
-
-    exec "resize" float2nr(&lines * 0.25)
-    setlocal laststatus=0 noshowmode noruler
-    setlocal nobuflisted
-    let g:terminal_drawer.win_id = win_getid()
-
+    return
+  endif
+  " vertical split resize
+  if stridx("hlHL", a:side) >= 0
+    if ! a:size > 0
+      vertical resize 6
+    else
+      execute "vertical resize" a:size
+    endif
   endif
 endfunction
 
-function! RemoveEmptyBuffers()
-  let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val)<0 && !getbufvar(v:val, "&mod")')
-  if !empty(buffers)
-      silent exe 'bw ' . join(buffers, ' ')
+function! s:ToggleTerminal(side, size) abort
+  let tpbl=[]
+  let closed = 0
+  let tpbl = tabpagebuflist()
+  " hide visible terminals
+  for buf in filter(range(1, bufnr('$')), 'bufexists(bufname(v:val)) && index(tpbl, v:val)>=0')
+    if getbufvar(buf, '&buftype') ==? 'terminal'
+      silent execute bufwinnr(buf) . "hide"
+      let closed += 1
+    endif
+  endfor
+  if closed > 0
+    return
   endif
+  " open first hidden terminal
+  for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)<0')
+    if getbufvar(buf, '&buftype') ==? 'terminal'
+      call PutTermPanel(buf, a:side, a:size)
+      return
+    endif
+  endfor
+  " open new terminal
+  call PutTermPanel(0, a:side, a:size)
 endfunction
+
+nnoremap <silent> <F4>       :call <SID>ToggleTerminal('J', 6)<CR>i
+tnoremap <silent> <F4> <C-w>N:call <SID>ToggleTerminal('J', 6)<CR>
+
+""tnoremap <silent> <Leader>t <C-w>N:call <SID>ToggleTerminal()<CR>
+"nnoremap <silent><leader>t            :call ToggleTerminalDrawer()<CR>
+"tnoremap <silent><leader>t     <C-w>N:call ToggleTerminalDrawer()<CR>
+
+"let g:terminal_drawer = { 'win_id': v:null, 'buffer_id': v:null }
+"function! ToggleTerminalDrawer() abort
+  "if win_gotoid(g:terminal_drawer.win_id)
+    "hide
+    "set laststatus=2 showmode ruler
+  "else
+    "if !g:terminal_drawer.buffer_id
+      "botright call term_start($SHELL)
+      "let g:terminal_drawer.buffer_id = bufnr("$")
+    "else
+      "execute 'botright sbuffer' . g:terminal_drawer.buffer_id
+      "exec 'normal! i'
+    "endif
+
+    "exec "resize" float2nr(&lines * 0.25)
+    "setlocal laststatus=0 noshowmode noruler
+    "setlocal nobuflisted
+    "let g:terminal_drawer.win_id = win_getid()
+
+  "endif
+"endfunction
+
+"function! RemoveEmptyBuffers()
+  "let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val)<0 && !getbufvar(v:val, "&mod")')
+  "if !empty(buffers)
+      "silent exe 'bw ' . join(buffers, ' ')
+  "endif
+"endfunction
