@@ -26,6 +26,8 @@ Plug 'zchee/deoplete-clang'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'plytophogy/vim-virtualenv'
+" Neoterm 
+Plug 'kassio/neoterm'
 " Syntax checker (supports Python)
 Plug 'w0rp/ale'
 " File explorer
@@ -45,12 +47,10 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "Send to terminal
-Plug 'habamax/vim-sendtoterm'
+"Plug 'habamax/vim-sendtoterm'
 Plug'junegunn/fzf.vim'
 " Easy insert comment
 Plug 'preservim/nerdcommenter'
-" Easy console
-
 call plug#end()
 
 "================================================
@@ -83,6 +83,19 @@ set mouse=a
 " disable text wrapping
 set textwidth=0
 
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window.
+  set lines=60 columns=120
+else
+  " This is console Vim.
+  if exists("+lines")
+    set lines=45
+  endif
+  if exists("+columns")
+    set columns=100
+  endif
+endif
 "============================
 " Colorscheme
 "============================
@@ -122,7 +135,7 @@ map gd :bd<cr>
 "Clear search result shortcut
 nnoremap <C-P> :noh<CR><C-L>
 "Save and source vimrc with one command
-nnoremap <F12> :so $MYVIMRC<CR>
+nnoremap <F12> :w <bar> :so $MYVIMRC<CR>
 " set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
 noremap <silent> <C-h> <C-w>h
@@ -160,8 +173,27 @@ vnoremap Å `
 autocmd FileType c,cpp,java,python,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
 
 "========================
+" Neoterm settings 
+"=======================
+"Map Esc to end terminal mode
+:tnoremap <Esc> <C-\><C-n>
+"Open terminal at bottom
+let g:neoterm_size = '13'
+let g:neoterm_fixedsize = 1
+let g:neoterm_autoscroll = 1
+let g:neoterm_default_mod = 'botright' 
+" Send files, line or selection to last terminal 
+nnoremap <silent> <f5> :TREPLSendFile<cr>
+nnoremap <silent> <f6> :TREPLSendLine<cr>
+vnoremap <silent> <f7> :TREPLSendSelection<cr>
+" open and hide/close last terminal terminals
+nnoremap <silent> <leader>t :Ttoggle<CR><Esc>
+tnoremap <silent><leader>t  <C-\><C-n>:Ttoggle<CR><Esc>
+
+"========================
 " Deoplete Settings
 "=======================
+
 
 let g:deoplete#enable_at_startup = 1
 " deoplete tab-complete

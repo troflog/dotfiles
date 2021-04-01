@@ -228,27 +228,9 @@ autocmd filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
 "============================
 
 
-let s:term_buf_nr = -1
-function! s:ToggleTerminal() abort
-    if s:term_buf_nr == -1
-        execute "botright terminal"
-        let s:term_buf_nr = bufnr("$")
-    else
-        try
-            execute "bdelete! " . s:term_buf_nr
-        catch
-            let s:term_buf_nr = -1
-            call <SID>ToggleTerminal()
-            return
-        endtry
-        let s:term_buf_nr = -1
-    endif
-endfunction
-
-
 "tnoremap <silent> <Leader>t <C-w>N:call <SID>ToggleTerminal()<CR>
-nnoremap <silent><leader>t           :call ToggleTerminalDrawer()<CR>
-tnoremap <silent><leader>t   <C-w>N:call ToggleTerminalDrawer()<CR>
+nnoremap <silent><leader>t            :call ToggleTerminalDrawer()<CR>
+tnoremap <silent><leader>t     <C-w>N:call ToggleTerminalDrawer()<CR>
 
 let g:terminal_drawer = { 'win_id': v:null, 'buffer_id': v:null }
 function! ToggleTerminalDrawer() abort
