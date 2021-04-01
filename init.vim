@@ -178,7 +178,7 @@ autocmd FileType c,cpp,java,python,javascript autocmd BufWritePre <buffer> %s/\s
 "Map Esc to end terminal mode
 :tnoremap <Esc> <C-\><C-n>
 "Open terminal at bottom
-let g:neoterm_size = '13'
+let g:neoterm_size = '8'
 let g:neoterm_fixedsize = 1
 let g:neoterm_autoscroll = 1
 let g:neoterm_default_mod = 'botright' 
