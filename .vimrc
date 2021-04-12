@@ -35,9 +35,12 @@ Plugin 'hanschen/vim-ipython-cell'
 Plugin 'preservim/nerdcommenter'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'lervag/vimtex'
+Plugin 'habamax/vim-sendtoterm'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
 "filetype plugin on
 filetype plugin on
 " Test area
@@ -114,7 +117,7 @@ map gd :bd<cr>
 "Clear search result shortcut
 nnoremap <C-P> :noh<CR><C-L>
 "Save and source vimrc with one command
-nnoremap <F12> :so $MYVIMRC<CR>
+nnoremap <F12> :w <bar> :so $MYVIMRC<CR>
 " Set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
 noremap <silent> <C-h> <C-w>h
@@ -166,15 +169,31 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 "Make ycm completion menu inside comments
 let g:ycm_complete_in_comments = 1 
 "Trigger autocomplete after typing two letters
-let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ],'python': [ 're!\w{2}' ]} "Need to point to this file in order to use autocomplete in c
-let g:ycm_global_ycm_extra_conf = '/home/tbf/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+"let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ],'python': [ 're!\w{2}' ]}
+"Need to point to this file in order to use autocomplete in c
+let g:ycm_global_ycm_extra_conf = '~/dotfiles/.ycm_extra_conf.py'
+" List of filetypes for which YCM should be turned off
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar': 1,
+      \ 'notes': 1,
+      \ 'markdown': 1,
+      \ 'netrw': 1,
+      \ 'unite': 1,
+      \ 'vimwiki': 1,
+      \ 'pandoc': 1,
+      \ 'infolog': 1,
+      \ 'leaderf': 1,
+      \ 'mail': 1
+      \}
 
 " UltiSnips   
 " Snippet triggering commands
 let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-n>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsListSnippets='<C-b>'
 let g:UltiSnipsEditSplit="vertical"
+"let g:UltiSnipsUsePythonVersion = 2
 
 "============================
 " Auto commands
@@ -199,3 +218,71 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 "Execute Python
 autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+"Compile and run C
+autocmd filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
+
+
+
+"============================
+" Test zone 
+"============================
+function! PutTermPanel(buf, side, size) abort
+  " new term if no buffer
+  if a:buf == 0
+    term
+  else
+    execute "sp" bufname(a:buf)
+  endif
+  " default side if wrong argument
+  if stridx("hjklHJKL", a:side) == -1
+    execute "wincmd" "J"
+  else
+    execute "wincmd" a:side
+  endif
+  " horizontal split resize
+  if stridx("jkJK", a:side) >= 0
+    if ! a:size > 0
+      resize 6
+    else
+      execute "resize" a:size
+    endif
+    return
+  endif
+  " vertical split resize
+  if stridx("hlHL", a:side) >= 0
+    if ! a:size > 0
+      vertical resize 6
+    else
+      execute "vertical resize" a:size
+    endif
+  endif
+endfunction
+
+function! s:ToggleTerminal(side, size) abort
+  let tpbl=[]
+  let closed = 0
+  let tpbl = tabpagebuflist()
+  " hide visible terminals
+  for buf in filter(range(1, bufnr('$')), 'bufexists(bufname(v:val)) && index(tpbl, v:val)>=0')
+    if getbufvar(buf, '&buftype') ==? 'terminal'
+      silent execute bufwinnr(buf) . "hide"
+      let closed += 1
+    endif
+  endfor
+  if closed > 0
+    return
+  endif
+  " open first hidden terminal
+  for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)<0')
+    if getbufvar(buf, '&buftype') ==? 'terminal'
+      call PutTermPanel(buf, a:side, a:size)
+      return
+    endif
+  endfor
+  " open new terminal
+  call PutTermPanel(0, a:side, a:size)
+endfunction
+
+nnoremap <silent> <leader>t call <SID>ToggleTerminal('J', 6)<CR>i
+tnoremap <silent> <leader>t  <C-w>N:call <SID>ToggleTerminal('J', 6)<CR>
+
