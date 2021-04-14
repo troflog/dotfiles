@@ -219,13 +219,14 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 "Compile and run C
-autocmd filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
-
+autocmd Filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
 
 
 "============================
-" Test zone 
+" Custom functions 
 "============================
+
+"Functions for toggle terminal on/off
 function! PutTermPanel(buf, side, size) abort
   " new term if no buffer
   if a:buf == 0
@@ -283,38 +284,9 @@ function! s:ToggleTerminal(side, size) abort
   call PutTermPanel(0, a:side, a:size)
 endfunction
 
-nnoremap <silent> <F4>       :call <SID>ToggleTerminal('J', 6)<CR>i
-tnoremap <silent> <F4> <C-w>N:call <SID>ToggleTerminal('J', 6)<CR>
+nnoremap <silent>  <leader>t       :call <SID>ToggleTerminal('J', 6)<CR>i
+tnoremap <silent> <leader>t  <C-w>N:call <SID>ToggleTerminal('J', 6)<CR>
 
-""tnoremap <silent> <Leader>t <C-w>N:call <SID>ToggleTerminal()<CR>
-"nnoremap <silent><leader>t            :call ToggleTerminalDrawer()<CR>
-"tnoremap <silent><leader>t     <C-w>N:call ToggleTerminalDrawer()<CR>
-
-"let g:terminal_drawer = { 'win_id': v:null, 'buffer_id': v:null }
-"function! ToggleTerminalDrawer() abort
-  "if win_gotoid(g:terminal_drawer.win_id)
-    "hide
-    "set laststatus=2 showmode ruler
-  "else
-    "if !g:terminal_drawer.buffer_id
-      "botright call term_start($SHELL)
-      "let g:terminal_drawer.buffer_id = bufnr("$")
-    "else
-      "execute 'botright sbuffer' . g:terminal_drawer.buffer_id
-      "exec 'normal! i'
-    "endif
-
-    "exec "resize" float2nr(&lines * 0.25)
-    "setlocal laststatus=0 noshowmode noruler
-    "setlocal nobuflisted
-    "let g:terminal_drawer.win_id = win_getid()
-
-  "endif
-"endfunction
-
-"function! RemoveEmptyBuffers()
-  "let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val)<0 && !getbufvar(v:val, "&mod")')
-  "if !empty(buffers)
-      "silent exe 'bw ' . join(buffers, ' ')
-  "endif
-"endfunction
+"============================
+" Test zone 
+"============================

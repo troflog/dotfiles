@@ -182,13 +182,14 @@ let g:neoterm_size = '8'
 let g:neoterm_fixedsize = 1
 let g:neoterm_autoscroll = 1
 let g:neoterm_default_mod = 'botright' 
+let g:neoterm_autoinsert = 1 
 " Send files, line or selection to last terminal 
 nnoremap <silent> <f5> :TREPLSendFile<cr>
 nnoremap <silent> <f6> :TREPLSendLine<cr>
 vnoremap <silent> <f7> :TREPLSendSelection<cr>
 " open and hide/close last terminal terminals
-nnoremap <silent> <leader>t :Ttoggle<CR><Esc>
-tnoremap <silent><leader>t  <C-\><C-n>:Ttoggle<CR><Esc>
+nnoremap <silent> <leader>t :Ttoggle<CR>
+tnoremap <silent><leader>t  <C-\><C-n>:Ttoggle<CR>
 
 "========================
 " Deoplete Settings
