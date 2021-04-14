@@ -219,6 +219,7 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 "Compile and run C
+<<<<<<< HEAD
 autocmd Filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
 
 
@@ -227,6 +228,15 @@ autocmd Filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
 "============================
 
 "Functions for toggle terminal on/off
+=======
+autocmd filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
+
+
+
+"============================
+" Test zone 
+"============================
+>>>>>>> 258f5ebb7f309bbd934f31bb6f4b3b4bad917b3c
 function! PutTermPanel(buf, side, size) abort
   " new term if no buffer
   if a:buf == 0
@@ -287,6 +297,3 @@ endfunction
 nnoremap <silent>  <leader>t       :call <SID>ToggleTerminal('J', 6)<CR>i
 tnoremap <silent> <leader>t  <C-w>N:call <SID>ToggleTerminal('J', 6)<CR>
 
-"============================
-" Test zone 
-"============================
