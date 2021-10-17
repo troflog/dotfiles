@@ -30,6 +30,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'preservim/nerdtree'
 Plugin 'patstockwell/vim-monokai-tasty'
 Plugin 'morhetz/gruvbox' 
+Plugin 'godlygeek/tabular'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'hanschen/vim-ipython-cell'
 Plugin 'preservim/nerdcommenter'
@@ -106,7 +107,8 @@ inoremap jk <ESC>
 set splitbelow
 set splitright
 " map leader
-let mapleader=","
+nnoremap <SPACE> <Nop>
+let mapleader="\<Space>"
 "Map fzf to ;
 map ; :Files<CR>
 " Use gn or gp to move forward/backwards through buffers
@@ -115,7 +117,7 @@ map gp :bp<cr>
 " Use gd to delete buffer
 map gd :bd<cr>  
 "Clear search result shortcut
-nnoremap <C-P> :noh<CR><C-L>
+nnoremap <Leader>p :noh<CR><C-L>
 "Save and source vimrc with one command
 nnoremap <F12> :w <bar> :so $MYVIMRC<CR>
 " Set moving between windows to ctrl+hjkl
@@ -161,7 +163,7 @@ set bg=dark
 let g:termdebug_popup = 0
 let g:termdebug_wide = 163
 
-" Youcompleteme
+"Youcompleteme
 " Use the first python executable it finds in PATH
 let g:ycm_python_binary_path = 'python'
 " Close prewview window after the user exit insert modus
@@ -172,6 +174,8 @@ let g:ycm_complete_in_comments = 1
 "let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ],'python': [ 're!\w{2}' ]}
 "Need to point to this file in order to use autocomplete in c
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/.ycm_extra_conf.py'
+let g:ycm_log_level = 'debug'
+let g:ycm_auto_trigger = 1
 " List of filetypes for which YCM should be turned off
 let g:ycm_filetype_blacklist = {
       \ 'tagbar': 1,
@@ -283,6 +287,6 @@ function! s:ToggleTerminal(side, size) abort
   call PutTermPanel(0, a:side, a:size)
 endfunction
 
-nnoremap <silent>  <leader>t       :call <SID>ToggleTerminal('J', 6)<CR>i
-tnoremap <silent> <leader>t  <C-w>N:call <SID>ToggleTerminal('J', 6)<CR>
+nnoremap <silent>  <C-p>       :call <SID>ToggleTerminal('J', 6)<CR>i
+tnoremap <silent> <C-p>  <C-w>N:call <SID>ToggleTerminal('J', 6)<CR>
 

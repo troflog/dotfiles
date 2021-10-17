@@ -124,7 +124,7 @@ inoremap jk <ESC>
 set splitbelow
 set splitright
 "Map leader to ,
-let mapleader=","
+let mapleader="\<Space>"
 "Map fzf to ;
 map ; :Files<CR>
 " Use gn or gp through buffers
@@ -133,7 +133,7 @@ map gp :bp<cr>
 " Use gd to delete buffer
 map gd :bd<cr>  
 "Clear search result shortcut
-nnoremap <C-P> :noh<CR><C-L>
+nnoremap <Leader>p :noh<CR><C-L>
 "Save and source vimrc with one command
 nnoremap <F12> :w <bar> :so $MYVIMRC<CR>
 " set moving between windows to ctrl+hjkl
@@ -188,8 +188,8 @@ nnoremap <silent> <f5> :TREPLSendFile<cr>
 nnoremap <silent> <f6> :TREPLSendLine<cr>
 vnoremap <silent> <f7> :TREPLSendSelection<cr>
 " open and hide/close last terminal terminals
-nnoremap <silent> <leader>t :Ttoggle<CR>
-tnoremap <silent><leader>t  <C-\><C-n>:Ttoggle<CR>
+nnoremap <silent> <C-p> :Ttoggle<CR>
+tnoremap <silent><C-p>  <C-\><C-n>:Ttoggle<CR>
 
 "========================
 " Deoplete Settings
