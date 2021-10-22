@@ -1,5 +1,4 @@
-"+++++++++++++++++++++++++++++++++++++++++++++++++
-"
+"+++++++++++++++++++++++++++++++++++++++++++++++++ 
 "
 "          MY VIM VIMRC FILE                             
 "
@@ -7,45 +6,12 @@
 "+++++++++++++++++++++++++++++++++++++++++++++++++
 
 "================================================= 
-"               Plugins
+"              PLUGINS              
 "================================================= 
 
-" Plugins will go here in the middle.
-set nocompatible              " be iMproved, required
-filetype off                  " required
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-"Do not like this
-"Plugin 'c.vim'
-Plugin 'oblitum/youcompleteme'
-Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plugin 'junegunn/fzf.vim'
-Plugin 'preservim/nerdtree'
-Plugin 'patstockwell/vim-monokai-tasty'
-Plugin 'morhetz/gruvbox' 
-Plugin 'godlygeek/tabular'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'hanschen/vim-ipython-cell'
-Plugin 'preservim/nerdcommenter'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'lervag/vimtex'
-Plugin 'habamax/vim-sendtoterm'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-call vundle#end()            " required
-filetype plugin indent on    " required
-"filetype plugin on
-filetype plugin on
-" Test area
-" Track the engine.
+call plug#end()
 
 "================================================
 " Basic Settings
@@ -156,48 +122,22 @@ vnoremap Å `
 
 "Color scheme
 "colorscheme vim-monokai-tasty
-autocmd vimenter * ++nested colorscheme gruvbox
-set bg=dark
+"autocmd vimenter * ++nested colorscheme gruvbox
+"set bg=dark
 
 " Termdebug 
-let g:termdebug_popup = 0
-let g:termdebug_wide = 163
-
-"Youcompleteme
-" Use the first python executable it finds in PATH
-let g:ycm_python_binary_path = 'python'
-" Close prewview window after the user exit insert modus
-let g:ycm_autoclose_preview_window_after_insertion = 1
-"Make ycm completion menu inside comments
-let g:ycm_complete_in_comments = 1 
-"Trigger autocomplete after typing two letters
-"let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ],'python': [ 're!\w{2}' ]}
-"Need to point to this file in order to use autocomplete in c
-let g:ycm_global_ycm_extra_conf = '~/dotfiles/.ycm_extra_conf.py'
-let g:ycm_log_level = 'debug'
-let g:ycm_auto_trigger = 1
-" List of filetypes for which YCM should be turned off
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar': 1,
-      \ 'notes': 1,
-      \ 'markdown': 1,
-      \ 'netrw': 1,
-      \ 'unite': 1,
-      \ 'vimwiki': 1,
-      \ 'pandoc': 1,
-      \ 'infolog': 1,
-      \ 'leaderf': 1,
-      \ 'mail': 1
-      \}
+"let g:termdebug_popup = 0
+"let g:termdebug_wide = 163
 
 " UltiSnips   
-" Snippet triggering commands
-let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-n>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-let g:UltiSnipsListSnippets='<C-b>'
-let g:UltiSnipsEditSplit="vertical"
-"let g:UltiSnipsUsePythonVersion = 2
+"" Snippet triggering commands
+""let g:UltiSnipsExpandTrigger = '<C-o>'
+"let g:UltiSnipsJumpForwardTrigger = '<C-n>'
+""let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+"
+"let g:UltiSnipsListSnippets='<C-b>'
+"let g:UltiSnipsEditSplit="vertical"
+""let g:UltiSnipsUsePythonVersion = 2
 
 "============================
 " Auto commands
