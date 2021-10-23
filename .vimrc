@@ -111,18 +111,19 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 "in normal mode to letters with
 "are difficult to type on a
 "norwegian keyboard
-nnoremap ø (
-nnoremap æ )
-nnoremap Ø {
-nnoremap Æ }
+nnoremap ø {
+nnoremap æ }
+nnoremap Ø (
+nnoremap Æ )
 nnoremap å 0
 nnoremap Å $
-vnoremap ø (
-vnoremap æ )
-vnoremap Ø {
-vnoremap Æ }
+vnoremap ø {
+vnoremap æ }
+vnoremap Ø (
+vnoremap Æ )
 vnoremap å \
 vnoremap Å `
+
 "============================
 " Plugin settings
 "============================

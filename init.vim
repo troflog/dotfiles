@@ -147,23 +147,23 @@ tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
 :au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-
 "Mapping unused norvegian letters
 "in normal mode to letters with
 "are difficult to type on a
 "norwegian keyboard
-nnoremap ø (
-nnoremap æ )
-nnoremap Ø {
-nnoremap Æ }
+nnoremap ø {
+nnoremap æ }
+nnoremap Ø (
+nnoremap Æ )
 nnoremap å 0
 nnoremap Å $
-vnoremap ø (
-vnoremap æ )
-vnoremap Ø {
-vnoremap Æ }
+vnoremap ø {
+vnoremap æ }
+vnoremap Ø (
+vnoremap Æ )
 vnoremap å \
 vnoremap Å `
+
 "============================
 " Auto commands
 "============================
