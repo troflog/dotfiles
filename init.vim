@@ -30,6 +30,8 @@ Plug 'plytophogy/vim-virtualenv'
 Plug 'kassio/neoterm'
 " Syntax checker (supports Python)
 Plug 'w0rp/ale'
+"Vim Fugitive
+Plug 'tpope/vim-fugitive'
 " File explorer
 Plug 'scrooloose/nerdtree'
 " Fuzzy finder
