@@ -208,6 +208,8 @@ let g:python3_host_prog = '/home/tbf/miniconda3/envs/neovim3/bin/python'
 let g:deoplete#sources#jedi#python_path = 'python3'
 let python_highlight_all = 1
 nmap <silent> <C-m> <Plug>(pydocstring)
+"Close preview window after completion
+autocmd CompleteDone * pclose!
 
 "========================
 " Deoplete clang 
