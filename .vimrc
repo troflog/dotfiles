@@ -84,8 +84,6 @@ set splitright
 " map leader
 nnoremap <SPACE> <Nop>
 let mapleader="\<Space>"
-"Map fzf to ;
-map ; :Files<CR>
 " Use gn or gp to move forward/backwards through buffers
 map gn :bn<cr>
 map gp :bp<cr>
@@ -134,6 +132,10 @@ vnoremap Å `
 "colorscheme gruvbox 
 autocmd vimenter * ++nested colorscheme gruvbox
 set bg=dark
+
+"Fzf
+"Map fzf to ;
+map ; :Files<CR>
 
 " Termdebug 
 "let g:termdebug_popup = 0

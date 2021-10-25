@@ -34,22 +34,17 @@ Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 " File explorer
 Plug 'scrooloose/nerdtree'
-" Fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-" Solarized colorscheme
-Plug 'iCyMind/NeoSolarized'
-Plug 'altercation/vim-colors-solarized'
-" Solarized colorscheme with neovim-qt support
-Plug 'JulioJu/neovim-qt-colors-solarized-truecolor-only'
+" Gruvbox colorscheme
+Plug 'morhetz/gruvbox'
 " Status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+"Snippet engine
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "Send to terminal
 "Plug 'habamax/vim-sendtoterm'
+"Fuzzy finder
 Plug'junegunn/fzf.vim'
 " Easy insert comment
 Plug 'preservim/nerdcommenter'
@@ -102,20 +97,9 @@ endif
 " Colorscheme
 "============================
 
-" use solarized as colorscheme
-" colorscheme kalisi "solarized
-set termguicolors
-" default value is "normal", Setting this option to "high" or "low" does use the 
-" same Solarized palette but simply shifts some values up or down in order to 
-" expand or compress the tonal range displayed.
-let g:neosolarized_contrast = "normal"
-" Special characters such as trailing whitespace, tabs, newlines, when displayed 
-" using ":set list" can be set to one of three levels depending on your needs. 
-" Default value is "normal". Provide "high" and "low" options.
-" style more, set this value to 0.
-let g:neosolarized_vertSplitBgTrans = 1
-set background=dark
-colorscheme NeoSolarized
+"Color scheme Gruvbox 
+autocmd vimenter * ++nested colorscheme gruvbox
+set bg=dark
 
 "============================
 " Basic Mappings
@@ -218,6 +202,12 @@ autocmd CompleteDone * pclose!
 "========================
 let g:deoplete#sources#clang#libclang_path ='/usr/lib/llvm-10/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
+
+"========================
+" Fzf
+"========================
+"Map fzf to ;
+map ; :Files<CR>
 
 "========================
 " UltiSnips   
