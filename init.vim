@@ -120,14 +120,14 @@ nnoremap ø {
 nnoremap æ }
 nnoremap Ø (
 nnoremap Æ )
-nnoremap å 0
-nnoremap Å $
+"nnoremap å 0
+"nnoremap Å $
 vnoremap ø {
 vnoremap æ }
 vnoremap Ø (
 vnoremap Æ )
-vnoremap å \
-vnoremap Å `
+"vnoremap å \
+"vnoremap Å `
 
 "============================
 " Auto commands
@@ -153,8 +153,8 @@ nnoremap <silent> <f5> :TREPLSendFile<cr>
 nnoremap <silent> <f6> :TREPLSendLine<cr>
 vnoremap <silent> <f7> :TREPLSendSelection<cr>
 " open and hide/close last terminal terminals
-nnoremap <silent> <C-p> :Ttoggle<CR>
-tnoremap <silent><C-p>  <C-\><C-n>:Ttoggle<CR>
+nnoremap <silent> <C-p> :Ttoggle<cr>
+tnoremap <silent><c-p>  <c-\><c-n>:ttoggle<cr>
 
 "========================
 " Coc-nvim

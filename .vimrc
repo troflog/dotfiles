@@ -20,6 +20,8 @@ Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 "Vim Fugitive
 Plug 'tpope/vim-fugitive'
+" easy insert comment
+Plug 'preservim/nerdcommenter'
 call plug#end()
 
 "================================================
