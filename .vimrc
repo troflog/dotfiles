@@ -178,7 +178,20 @@ function! s:check_back_space() abort
 endfunction
 "Open defintion in new window
 nmap <silent> gv :call CocAction('jumpDefinition', 'vsplit')<CR>
+" GoTo code navigation.
+"nmap <silent> gv <Plug>(coc-definition)
 "nmap <silent> gt :call CocAction('jumpDefinition', 'tabe')<CR>
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
 "============================
 " Auto commands
