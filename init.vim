@@ -154,7 +154,7 @@ nnoremap <silent> <f6> :TREPLSendLine<cr>
 vnoremap <silent> <f7> :TREPLSendSelection<cr>
 " open and hide/close last terminal terminals
 nnoremap <silent> <C-p> :Ttoggle<cr>
-tnoremap <silent><c-p>  <c-\><c-n>:ttoggle<cr>
+tnoremap <silent><c-p>  <c-\><c-n>:Ttoggle<cr>
 
 "========================
 " Coc-nvim
