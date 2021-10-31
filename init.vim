@@ -30,6 +30,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'preservim/nerdcommenter'
 " Git  helper
 Plug 'tpope/vim-fugitive'
+" Vimspector
+Plug 'puremourning/vimspector' 
 call plug#end()
 
 "================================================
@@ -100,7 +102,7 @@ map gd :bd<cr>
 "Clear search result shortcut
 nnoremap <Leader>p :noh<CR><C-L>
 "Save and source vimrc with one command
-nnoremap <F12> :w <bar> :so $MYVIMRC<CR>
+nnoremap <Leader>m :w <bar> :so $MYVIMRC<CR>
 " set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
 noremap <silent> <C-h> <C-w>h
@@ -137,6 +139,12 @@ vnoremap Æ )
 " where trailing spaces are important
 autocmd FileType c,cpp,java,python,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
 
+"============================
+" Path to python 
+"============================
+let g:python_host_prog =  '/home/tbf/miniconda3/envs/neovim/bin/python'
+let g:python3_host_prog = '/home/tbf/miniconda3/envs/neovim3/bin/python'
+
 "========================
 " Neoterm settings 
 "=======================
@@ -149,9 +157,9 @@ let g:neoterm_autoscroll = 1
 let g:neoterm_default_mod = 'botright' 
 let g:neoterm_autoinsert = 1 
 " Send files, line or selection to last terminal 
-nnoremap <silent> <f5> :TREPLSendFile<cr>
-nnoremap <silent> <f6> :TREPLSendLine<cr>
-vnoremap <silent> <f7> :TREPLSendSelection<cr>
+"nnoremap <silent> <leader> :TREPLSendFile<cr>
+"nnoremap <silent> <leader> :TREPLSendLine<cr>
+"vnoremap <silent> <leader> :TREPLSendSelection<cr>
 " open and hide/close last terminal terminals
 nnoremap <silent> <C-p> :Ttoggle<cr>
 tnoremap <silent><c-p>  <c-\><c-n>:Ttoggle<cr>
@@ -213,6 +221,15 @@ map ; :FZF<CR>
 "map <Leader> <Plug>(easymotion-prefix)
 
 "========================
+" Vimspector
+"========================
+let g:vimspector_enable_mappings = 'HUMAN'
+"packadd! vimspector
+"nmap <F11>      :call vimspector#StepInto()<CR>
+"nmap <leader>vn :call vimspector#StepInto()<CR>
+nmap <leader>vr :VimspectorReset<CR>
+
+"========================
 " NerdTree
 "========================
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
@@ -253,7 +270,8 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 " Commands
 "============================
 "Execute Python
-autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd filetype python map <buffer> <ctrl><f5>       :w<cr>:exec '!python3' shellescape(@%, 1)<cr>
+autocmd FileType python imap <buffer> <ctrl><f5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 "Compile and run C
-autocmd filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
+autocmd filetype c nnoremap <ctrl><f5>                :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
+
