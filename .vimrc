@@ -22,6 +22,11 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 " easy insert comment
 Plug 'preservim/nerdcommenter'
+" Vimspector
+Plug 'puremourning/vimspector' 
+" Fuzzy finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 "================================================
@@ -94,7 +99,7 @@ map gd :bd<cr>
 "Clear search result shortcut
 nnoremap <Leader>p :noh<CR><C-L>
 "Save and source vimrc with one command
-nnoremap <F12> :w <bar> :so $MYVIMRC<CR>
+nnoremap <leader>m :w <bar> :so $MYVIMRC<CR>
 " Set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
 noremap <silent> <C-h> <C-w>h
@@ -216,10 +221,17 @@ let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 
 "Execute Python
-autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python map <buffer> <leader>r :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <leader>r <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 "Compile and run C
-autocmd Filetype c nnoremap <f9> :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
+autocmd Filetype c nnoremap <leader>r :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
+
+"Vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+"packadd! vimspector
+"nmap <F11>      :call vimspector#StepInto()<CR>
+"nmap <leader>vn :call vimspector#StepInto()<CR>
+nmap <leader>vr :VimspectorReset<CR>
 
 "============================
 " Custom functions 

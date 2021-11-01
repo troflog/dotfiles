@@ -270,8 +270,8 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 " Commands
 "============================
 "Execute Python
-autocmd filetype python map <buffer> <ctrl><f5>       :w<cr>:exec '!python3' shellescape(@%, 1)<cr>
-autocmd FileType python imap <buffer> <ctrl><f5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd filetype python map <buffer> <leader>r       :w<cr>:exec '!python3' shellescape(@%, 1)<cr>
+autocmd FileType python imap <buffer> <leader>r <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 "Compile and run C
-autocmd filetype c nnoremap <ctrl><f5>                :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
+autocmd filetype c nnoremap <leader>r                :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
 
