@@ -157,9 +157,9 @@ let g:neoterm_autoscroll = 1
 let g:neoterm_default_mod = 'botright' 
 let g:neoterm_autoinsert = 1 
 " Send files, line or selection to last terminal 
-"nnoremap <silent> <leader> :TREPLSendFile<cr>
-"nnoremap <silent> <leader> :TREPLSendLine<cr>
-"vnoremap <silent> <leader> :TREPLSendSelection<cr>
+nnoremap <silent> <leader>nf :TREPLSendFile<cr><esc>
+nnoremap <silent> <leader>nl :TREPLSendLine<cr><esc>
+vnoremap <silent> <leader>ns :TREPLSendSelection<cr><esc>
 " open and hide/close last terminal terminals
 nnoremap <silent> <C-p> :Ttoggle<cr>
 tnoremap <silent><c-p>  <c-\><c-n>:Ttoggle<cr>
