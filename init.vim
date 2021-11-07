@@ -44,6 +44,8 @@ set encoding=utf-8
 set autoindent
 " syntax highlighting
 syntax enable
+" Removes the "No write since last change (add ! to overwrite)
+set hidden
 " Copies using system clipboard
 set clipboard+=unnamedplus
 " display line number relatively to the current one

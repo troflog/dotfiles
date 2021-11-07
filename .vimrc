@@ -40,6 +40,8 @@ filetype plugin indent on
 set encoding=utf-8
 " copy indent from current line when starting a new line
 set autoindent
+" Removes the "No write since last change (add ! to overwrite)
+set hidden
 "automatically inserts one extra level of indentation
 "in some cases, and works for C-like files
 set smartindent
