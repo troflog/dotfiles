@@ -32,6 +32,9 @@ Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 " Vimspector
 Plug 'puremourning/vimspector' 
+"Vim-ipython-cell
+Plug 'jpalardy/vim-slime', { 'for': 'python' }
+Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 call plug#end()
 
 "================================================
@@ -147,6 +150,10 @@ autocmd FileType c,cpp,java,python,javascript autocmd BufWritePre <buffer> %s/\s
 let g:python_host_prog =  '/home/tbf/miniconda3/envs/neovim/bin/python'
 let g:python3_host_prog = '/home/tbf/miniconda3/envs/neovim3/bin/python'
 
+"Vim-ipython-cell
+Plug 'jpalardy/vim-slime', { 'for': 'python' }
+Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
+
 "========================
 " Neoterm settings 
 "=======================
@@ -159,12 +166,33 @@ let g:neoterm_autoscroll = 1
 let g:neoterm_default_mod = 'botright' 
 let g:neoterm_autoinsert = 1 
 " Send files, line or selection to last terminal 
-nnoremap <silent> <leader>nf :TREPLSendFile<cr><esc>
-nnoremap <silent> <leader>nl :TREPLSendLine<cr><esc>
-vnoremap <silent> <leader>ns :TREPLSendSelection<cr><esc>
+"nnoremap <silent> <leader>nf :TREPLSendFile<cr><esc> nnoremap <silent> <leader>nl :TREPLSendLine<cr><esc>
+"vnoremap <silent> <leader>ns :TREPLSendSelection<cr><esc>
 " open and hide/close last terminal terminals
 nnoremap <silent> <C-p> :Ttoggle<cr>
 tnoremap <silent><c-p>  <c-\><c-n>:Ttoggle<cr>
+
+"========================
+" Vim-Slime 
+"=======================
+"Turn of vim-slime mappings
+let g:slime_no_mappings = 1
+autocmd filetype python xmap <silent> <leader>nr      <Plug>SlimeRegionSend 
+nmap <c-c>v                                           <Plug>SlimeConfig
+
+"========================
+" Vim-Ipython-cell 
+"=======================
+
+"Default to neovim terminal
+let g:slime_target = "neovim"
+" fix paste issues in ipython
+let g:slime_python_ipython = 1
+" IPython send to command
+autocmd filetype python nnoremap <silent> <leader>nf :IPythonCellRun<cr> 
+autocmd filetype python nnoremap <silent> <leader>nl :SlimeSendCurrentLine<cr>
+
+
 
 "========================
 " Coc-nvim
