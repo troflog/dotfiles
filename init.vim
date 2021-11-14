@@ -177,7 +177,7 @@ tnoremap <silent><c-p>  <c-\><c-n>:Ttoggle<cr>
 "=======================
 "Turn of vim-slime mappings
 let g:slime_no_mappings = 1
-autocmd filetype python xmap <silent> <leader>nr      <Plug>SlimeRegionSend 
+autocmd filetype python xmap <buffer> <silent> <leader>nr      <Plug>SlimeRegionSend 
 nmap <c-c>v                                           <Plug>SlimeConfig
 
 "========================
@@ -189,8 +189,8 @@ let g:slime_target = "neovim"
 " fix paste issues in ipython
 let g:slime_python_ipython = 1
 " IPython send to command
-autocmd filetype python nnoremap <silent> <leader>nf :IPythonCellRun<cr> 
-autocmd filetype python nnoremap <silent> <leader>nl :SlimeSendCurrentLine<cr>
+autocmd filetype python nnoremap <buffer>  <silent> <leader>nf :IPythonCellRun<cr> 
+autocmd filetype python nnoremap <buffer>  <silent> <leader>nl :SlimeSendCurrentLine<cr>
 
 
 
