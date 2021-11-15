@@ -178,7 +178,7 @@ tnoremap <silent><c-p>  <c-\><c-n>:Ttoggle<cr>
 "Turn of vim-slime mappings
 let g:slime_no_mappings = 1
 autocmd filetype python xmap <buffer> <silent> <leader>nr      <Plug>SlimeRegionSend 
-nmap <c-c>v                                           <Plug>SlimeConfig
+nmap <c-c>v                                                    <Plug>SlimeConfig
 
 "========================
 " Vim-Ipython-cell 
@@ -190,7 +190,11 @@ let g:slime_target = "neovim"
 let g:slime_python_ipython = 1
 " IPython send to command
 autocmd filetype python nnoremap <buffer>  <silent> <leader>nf :IPythonCellRun<cr> 
-autocmd filetype python nnoremap <buffer>  <silent> <leader>nl :SlimeSendCurrentLine<cr>
+autocmd filetype python nmap <buffer>               <leader>nh :SlimeSendCurrentLine<CR> 
+autocmd filetype python nmap <buffer> <silent>    <leader>nm   <Plug>SlimeParagraphSend
+"nmap <leader>nl :reg<CR>
+"nmap sd <Plug>SlimeParagraphSend
+
 
 
 
