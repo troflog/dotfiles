@@ -1,6 +1,4 @@
-"==================================================
-"                                                
-"                                                
+"================================================== 
 "         MY NEOVIM VIMRC FILE                   
 "                                                
 "                                                
@@ -33,7 +31,7 @@ Plug 'tpope/vim-fugitive'
 " Vimspector
 Plug 'puremourning/vimspector' 
 "Vim-ipython-cell
-Plug 'jpalardy/vim-slime', { 'for': 'python' }
+Plug 'jpalardy/vim-slime'
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 call plug#end()
 
@@ -178,6 +176,10 @@ tnoremap <silent><c-p>  <c-\><c-n>:Ttoggle<cr>
 "Turn of vim-slime mappings
 let g:slime_no_mappings = 1
 
+"This should work for all filetypes
+nnoremap <silent>  <leader>nh :SlimeSendCurrentLine<CR> 
+nnoremap <silent>  <c-c>v      <Plug>SlimeConfig
+
 "========================
 " Vim-Ipython-cell 
 "=======================
@@ -187,12 +189,9 @@ let g:slime_target = "neovim"
 " fix paste issues in ipython
 let g:slime_python_ipython = 1
 " IPython send to command
-autocmd filetype python nnoremap <buffer>  <silent> <leader>nf :IPythonCellRun<cr> 
-autocmd filetype python nmap <buffer> <silent>      <leader>nm <Plug>SlimeParagraphSend
-autocmd filetype python xmap <buffer> <silent>      <leader>nr <Plug>SlimeRegionSend 
-"This should work for all filetypes
-nnoremap <silent>                                   <leader>nh :SlimeSendCurrentLine<CR> 
-nnoremap <c-c>v                                                <Plug>SlimeConfig
+"autocmd filetype python nnoremap <buffer>  <silent> <leader>nf :IPythonCellRun<cr> 
+"autocmd filetype python nmap <buffer> <silent>      <leader>nm <Plug>SlimeParagraphSend
+"autocmd filetype python xmap <buffer> <silent>      <leader>nr <Plug>SlimeRegionSend 
 
 "========================
 " Coc-nvim
@@ -300,8 +299,15 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 " Commands
 "============================
 "Execute Python
-autocmd filetype python map <buffer> <leader>r       :w<cr>:exec '!python3' shellescape(@%, 1)<cr>
-autocmd FileType python imap <buffer> <leader>r <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd filetype python nmap <buffer> <leader>r       :w<cr>:exec '!python3' shellescape(@%, 1)<cr>
+"autocmd FileType python imap <buffer> <leader>r <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 "Compile and run C
-autocmd filetype c nnoremap <leader>r                :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
+autocmd filetype c nmap <leader>r                :w<cr> :!clear<cr> :!gcc % -o %< && ./%<<CR>
 
+nmap <F29> :echo "C-F5" <cr>
+nmap <F30> :echo "C-F6" <cr>
+nmap <F33> :echo "C-F9" <cr>
+nmap <F29> :echo "C-F5" <cr>
+
+nmap <C-S-F9> :echo "S-C-F9"<cr>
+nmap <C-CR> :echo "trond"<cr>
