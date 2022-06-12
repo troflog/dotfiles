@@ -8,6 +8,14 @@
 "================================================= 
 "               Plugins
 "================================================= 
+"
+" Install vim plug if not installed
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " Plugins will go here in the middle.
 call plug#begin('~/.local/share/nvim/plugged')
 " Coc-nvim autocomplete
@@ -16,7 +24,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Lokaltog/vim-easymotion'
 " Neoterm 
 Plug 'kassio/neoterm'
-"" File explorer
+" File explorer
 Plug 'scrooloose/nerdtree'
 " Gruvbox colorscheme
 Plug 'morhetz/gruvbox'
@@ -63,8 +71,7 @@ set tabstop=4
 set shiftwidth=4
 " enable mouse
 set mouse=a
-" disable text wrapping
-set textwidth=0
+" disable text wrapping set textwidth=0
 
 if has("gui_running")
   " GUI is running or is about to start.
