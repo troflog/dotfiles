@@ -233,8 +233,6 @@ inoremap <silent><expr> <Tab>
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 
-
-
 "Open defintion in new window
 nmap <silent> gv :call CocAction('jumpDefinition', 'vsplit')<CR>
 
