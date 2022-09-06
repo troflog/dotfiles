@@ -28,6 +28,7 @@ Plug 'kassio/neoterm'
 Plug 'scrooloose/nerdtree'
 " Gruvbox colorscheme
 Plug 'morhetz/gruvbox'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 "" Status line
 Plug 'vim-airline/vim-airline'
 " Fuzzy finder
@@ -38,9 +39,6 @@ Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 " Vimspector
 Plug 'puremourning/vimspector' 
-"Vim-ipython-cell
-Plug 'jpalardy/vim-slime'
-Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 call plug#end()
 
 "================================================
@@ -60,8 +58,8 @@ set clipboard+=unnamedplus
 " display line number relatively to the current one
 set rnu
 " highlight the current line and column
-set cursorline
-set cursorcolumn
+"set cursorline
+"set cursorcolumn
 " <tab> inserts spaces instead of tabs
 set expandtab
 " set softtabstop=0
@@ -73,27 +71,31 @@ set shiftwidth=4
 set mouse=a
 " disable text wrapping set textwidth=0
 
-if has("gui_running")
-  " GUI is running or is about to start.
-  " Maximize gvim window.
-  set lines=60 columns=120
-else
-  " This is console Vim.
-  if exists("+lines")
-    set lines=45
-  endif
-  if exists("+columns")
-    set columns=100
-  endif
-endif
+"if has("gui_running")
+  "" GUI is running or is about to start.
+  "" Maximize gvim window.
+  "set lines=60 columns=120
+"else
+  "" This is console Vim.
+  "if exists("+lines")
+    "set lines=45
+  "endif
+  "if exists("+columns")
+    "set columns=100
+  "endif
+"endif
 
 "============================
 " Colorscheme
 "============================
 "Color scheme Gruvbox 
-autocmd vimenter * ++nested colorscheme gruvbox
-set bg=dark
-
+"autocmd vimenter * ++nested colorscheme gruvbox
+"set bg=dark
+"let g:gruvbox_contrast_dark='hard'
+let g:tokyonight_style = "night"
+let g:tokyonight_italic_functions = 1
+let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+colorscheme tokyonight
 "============================
 " Basic Mappings
 "============================
@@ -106,13 +108,15 @@ set splitright
 let mapleader="\<Space>"
 " Use gn or gp through buffers
 map gn :bn<cr>
-map gp :bp<cr>
+map gj :bp<cr>
 " Use gd to delete buffer
 map gd :bd<cr>  
 "Clear search result shortcut
 nnoremap <Leader>p :noh<CR><C-L>
 "Save and source vimrc with one command
 nnoremap <Leader>m :w <bar> :so $MYVIMRC<CR>
+"
+nnoremap <Leader>n :b<Space>
 " set moving between windows to ctrl+hjkl
 noremap <silent> <C-l> <C-w>l
 noremap <silent> <C-h> <C-w>h
@@ -164,41 +168,17 @@ Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 "=======================
 "Map Esc to end terminal mode
 :tnoremap <Esc> <C-\><C-n>
-"Open terminal at bottom
-let g:neoterm_size = '8'
+"Open terminal at bottom let g:neoterm_size = '8'
 let g:neoterm_fixedsize = 1
 let g:neoterm_autoscroll = 1
 let g:neoterm_default_mod = 'botright' 
 let g:neoterm_autoinsert = 1 
 " Send files, line or selection to last terminal 
-"nnoremap <silent> <leader>nf :TREPLSendFile<cr><esc> nnoremap <silent> <leader>nl :TREPLSendLine<cr><esc>
-"vnoremap <silent> <leader>ns :TREPLSendSelection<cr><esc>
+nnoremap <silent> <leader>sl :TREPLSendFile<cr><esc> nnoremap <silent> <leader>nl :TREPLSendLine<cr><esc>
+vnoremap <silent> <leader>ss :TREPLSendSelection<cr><esc>
 " open and hide/close last terminal terminals
 nnoremap <silent> <C-p> :Ttoggle<cr>
 tnoremap <silent><c-p>  <c-\><c-n>:Ttoggle<cr>
-
-"========================
-" Vim-Slime 
-"=======================
-"Turn of vim-slime mappings
-let g:slime_no_mappings = 1
-
-"This should work for all filetypes
-nnoremap <silent>  <leader>nh :SlimeSendCurrentLine<CR> 
-nnoremap <silent>  <c-c>v      <Plug>SlimeConfig
-
-"========================
-" Vim-Ipython-cell 
-"=======================
-
-"Default to neovim terminal
-let g:slime_target = "neovim"
-" fix paste issues in ipython
-let g:slime_python_ipython = 1
-" IPython send to command
-"autocmd filetype python nnoremap <buffer>  <silent> <leader>nf :IPythonCellRun<cr> 
-"autocmd filetype python nmap <buffer> <silent>      <leader>nm <Plug>SlimeParagraphSend
-"autocmd filetype python xmap <buffer> <silent>      <leader>nr <Plug>SlimeRegionSend 
 
 "========================
 " Coc-nvim
@@ -208,7 +188,7 @@ set hidden
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
-" Give more space for displaying messages.
+" Give more sbpbace for displaying messages.
 set cmdheight=2
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -224,17 +204,8 @@ inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
 inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
 "To make <cr> select the first completion item and confirm the completion when no item has been selected:
-"inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-
-"Use <tab> for trigger completion and navigate to the next complete item
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-"inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : CheckBackspace() ? "\<Tab>" : coc#refresh()
-
-"Open defintion in new window
+  
+"Open kefintion in new window
 nmap <silent> gv :call CocAction('jumpDefinition', 'vsplit')<CR>
 
 " Use K to show documentation in preview window.
