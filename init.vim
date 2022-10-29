@@ -27,18 +27,22 @@ Plug 'kassio/neoterm'
 " File explorer
 Plug 'scrooloose/nerdtree'
 " Gruvbox colorscheme
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 "" Status line
 Plug 'vim-airline/vim-airline'
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Easy insert comment
+ "Easy insert comment
 Plug 'preservim/nerdcommenter'
 " Git  helper
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'tpope/vim-fugitive'
 " Vimspector
 Plug 'puremourning/vimspector' 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 call plug#end()
 
 "================================================
@@ -71,20 +75,6 @@ set shiftwidth=4
 set mouse=a
 " disable text wrapping set textwidth=0
 
-"if has("gui_running")
-  "" GUI is running or is about to start.
-  "" Maximize gvim window.
-  "set lines=60 columns=120
-"else
-  "" This is console Vim.
-  "if exists("+lines")
-    "set lines=45
-  "endif
-  "if exists("+columns")
-    "set columns=100
-  "endif
-"endif
-
 "============================
 " Colorscheme
 "============================
@@ -95,7 +85,7 @@ set mouse=a
 let g:tokyonight_style = "night"
 let g:tokyonight_italic_functions = 1
 let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-colorscheme tokyonight
+"colorscheme tokyonight
 "============================
 " Basic Mappings
 "============================
@@ -152,6 +142,12 @@ vnoremap Æ )
 " need to be disabled for some filetypes like markdown or latex
 " where trailing spaces are important
 autocmd FileType c,cpp,java,python,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 "============================
 " Path to python 
