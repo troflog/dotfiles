@@ -81,7 +81,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+#zsh-autosuggestions 
+plugins=(git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -118,19 +119,19 @@ source $ZSH/oh-my-zsh.sh
 #    MY CUSTOM CHANGES    ------#
 #-------------------------------#
 
-source ~/miniconda3/etc/profile.d/conda.sh
-if [[ -z ${CONDA_PREFIX+x} ]]; then
-    export PATH="~/conda/bin:$PATH"
-fi
-#Setup miniconda
-source ~/miniconda3/etc/profile.d/conda.sh
-if [[ -z ${CONDA_PREFIX+x} ]]; then
-    export PATH="~/conda/bin:$PATH"
-fi
-CONDA_ROOT=~/miniconda3
-if [[ -r $CONDA_ROOT/etc/profile.d/bash_completion.sh ]]; then
-    source $CONDA_ROOT/etc/profile.d/bash_completion.sh
-fi
+## source ~/miniconda3/etc/profile.d/conda.sh  # commented out by conda initialize
+#if [[ -z ${CONDA_PREFIX+x} ]]; then
+#    export PATH="~/conda/bin:$PATH"
+#fi
+##Setup miniconda
+## source ~/miniconda3/etc/profile.d/conda.sh  # commented out by conda initialize
+#if [[ -z ${CONDA_PREFIX+x} ]]; then
+#    export PATH="~/conda/bin:$PATH"
+#fi
+#CONDA_ROOT=~/miniconda3
+#if [[ -r $CONDA_ROOT/etc/profile.d/bash_completion.sh ]]; then
+#    source $CONDA_ROOT/etc/profile.d/bash_completion.sh
+#fi
 
 
 alias pys="conda activate pys"
@@ -184,3 +185,19 @@ fi
 
 #Use tab for autocomplete
 bindkey '       ' autosuggest-accept
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/tbf/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/tbf/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/tbf/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/tbf/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
