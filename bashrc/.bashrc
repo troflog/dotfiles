@@ -1,7 +1,7 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-
+eval "$(starship init bash)"
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -162,6 +162,7 @@ elif [ -f "/usr/share/autojump/autojump.bash" ]; then
 else
 	echo "can't found the autojump script"
 fi
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/tbf/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -177,3 +178,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+clear
