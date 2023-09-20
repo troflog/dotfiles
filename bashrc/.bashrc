@@ -116,35 +116,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/tbf/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/tbf/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/tbf/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/tbf/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+#------------------------------------#
+#    MY PERSONAL CONIFGS             #
+#------------------------------------#
 
-#Setup miniconda
-source ~/miniconda3/etc/profile.d/conda.sh
-if [[ -z ${CONDA_PREFIX+x} ]]; then
-    export PATH="~/conda/bin:$PATH"
-fi
-#Setup miniconda
-source ~/miniconda3/etc/profile.d/conda.sh
-if [[ -z ${CONDA_PREFIX+x} ]]; then
-    export PATH="~/conda/bin:$PATH"
-fi
-CONDA_ROOT=~/miniconda3
-if [[ -r $CONDA_ROOT/etc/profile.d/bash_completion.sh ]]; then
-    source $CONDA_ROOT/etc/profile.d/bash_completion.sh
-fi
 alias pys="conda activate pys"
 alias pysout="conda deactivate"
 alias pcupdate="sudo apt update && sudo apt -y upgrade && sudo apt -y dist-upgrade && sudo apt -y autoremove && sudo apt autoclean && neopysup"
@@ -163,16 +138,9 @@ export PATH="/home/tbf/.local/bin:$PATH"
 export PATH="/home/tbf/lua-language-server/bin:$PATH"        
 
 alias luamake=/home/tbf/ubuntu-setup/lua-language-server/3rd/luamake/luamake
-alias vim="nvim"
-alias vi="nvim"
-
-
-alias nvim-chad="NVIM_APPNAME=NvChad nvim"
-alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
-alias nvim-tbf="NVIM_APPNAME=tbf nvim"
 
 nvims() {
-  items=("default" "NvChad" "LazyVim" "allman" "tbf" "nkt" "KickStart")
+  items=("default") # "NvChad" "LazyVim" "tbf" "nkt" "KickStart")
   #config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
@@ -185,6 +153,7 @@ nvims() {
 }
 
 bind -x '"\C-a": nvims'
+#Autojump
 
 if [ -f "/usr/share/autojump/autojump.sh" ]; then
 	. /usr/share/autojump/autojump.sh
@@ -193,3 +162,18 @@ elif [ -f "/usr/share/autojump/autojump.bash" ]; then
 else
 	echo "can't found the autojump script"
 fi
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/tbf/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/tbf/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/tbf/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/tbf/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
