@@ -140,7 +140,7 @@ export PATH="/home/tbf/lua-language-server/bin:$PATH"
 alias luamake=/home/tbf/ubuntu-setup/lua-language-server/3rd/luamake/luamake
 
 nvims() {
-  items=("default") # "NvChad" "LazyVim" "tbf" "nkt" "KickStart")
+  items=("default" "kickstart" "lazyvim") # "NvChad" "LazyVim" "tbf" "nkt" "KickStart")
   #config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
