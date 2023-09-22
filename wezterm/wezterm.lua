@@ -19,7 +19,7 @@ config.font_size = 9
 -- For example, changing the color scheme:
 config.color_scheme = 'tokyonight'
 -- Remove title bar
-config.window_decorations = "NONE"
+config.window_decorations = "RESIZE"
 
 -- and finally, return the configuration to wezterm
 return config
