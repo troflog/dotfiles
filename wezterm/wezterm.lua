@@ -6,8 +6,6 @@ local config = {}
 
 -- Text
 
-config.font = wezterm.font 'JetBrains Mono'
-config.font_size = 9
 -- In newer versions of wezterm, use the config_builder which will
 -- help provide clearer error messages
 if wezterm.config_builder then
@@ -16,8 +14,12 @@ end
 
 -- This is where you actually apply your config choices
 
+config.font = wezterm.font 'JetBrains Mono'
+config.font_size = 9 
 -- For example, changing the color scheme:
-config.color_scheme = 'AdventureTime'
+config.color_scheme = 'tokyonight'
+-- Remove title bar
+config.window_decorations = "NONE"
 
 -- and finally, return the configuration to wezterm
 return config
