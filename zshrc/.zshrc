@@ -96,10 +96,9 @@ alias vi="nvim"
 #----------------------------------#
 #    NEOVIM CONFIG PICKER          #
 #----------------------------------#
-
 function nvims() {
-  items=("default" "kickStart" "lazyvim") 
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  items=("default" "kickstart" "lazyvim" "astrovim") 
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"
     return 0
@@ -108,9 +107,7 @@ function nvims() {
   fi
   NVIM_APPNAME=$config nvim $@
 }
-
 bindkey -s ^a "nvims\n"
-
 
 #Autojump
 if [ -f "/usr/share/autojump/autojump.sh" ]; then
