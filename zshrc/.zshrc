@@ -63,6 +63,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias lg='ls -lG --color --group-directories-first -A -v'
+alias ds='du -sk * | sort -nr'
 #-----Plugins------
 
 
