@@ -92,6 +92,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias lg='ls -lG --color --group-directories-first -A -v'
+#Sort by type(folder or file) and hidden/not-hidden
 alias ds='du -sk * | sort -nr'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -141,7 +142,7 @@ export PATH="/home/tbf/lua-language-server/bin:$PATH"
 alias luamake=/home/tbf/ubuntu-setup/lua-language-server/3rd/luamake/luamake
 
 nvims() {
-  items=("default" "astrovim" "kickstart" "lazyvim") # "NvChad" "LazyVim" "tbf" "nkt" "KickStart")
+  items=("default" "astrovim" "kickstart" "lazyvim" "kicker") # "NvChad" "LazyVim" "tbf" "nkt" "KickStart")
   #config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
