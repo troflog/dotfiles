@@ -130,6 +130,7 @@ alias pcupdate="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autor
 
 alias vim="nvim"
 alias ipys="pys && ipython"
+alias qtco="pys && jupyter qtconsole"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
