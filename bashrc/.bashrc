@@ -124,10 +124,9 @@ fi
 
 alias pys="conda activate pys"
 alias pysout="conda deactivate"
-alias pcupdate="sudo apt update && sudo apt -y upgrade && sudo apt -y dist-upgrade && sudo apt -y autoremove && sudo apt autoclean && neopysup"
-alias pcupdate="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y && pysup"
+alias condaup="conda update -n base -c defaults conda -y"
 alias pysup="pys && conda update -y --all && pysout"
-alias neopysup="conda activate neovim && conda update -y --all && conda deactivate && conda activate neovim3 && conda update -y --all && conda deactivate"
+alias pcupdate="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y && condaup && pysup"
 
 alias vim="nvim"
 alias ipys="pys && ipython"
