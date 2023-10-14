@@ -155,6 +155,7 @@ nvims() {
 }
 
 bind -x '"\C-a": nvims'
+bind -x '"\el": clear'
 #Autojump
 
 if [ -f "/usr/share/autojump/autojump.sh" ]; then
