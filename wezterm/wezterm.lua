@@ -13,7 +13,9 @@ config.font_size = 9
 
 --Theme
 config.color_scheme = 'tokyonight'
-
+--Inital size
+config.initial_cols = 83
+config.initial_rows = 35
 -- Looks
 -- Remove title bar
 config.window_decorations = "RESIZE"
@@ -24,18 +26,14 @@ config.use_fancy_tab_bar= false
 
 
 ----Setup Navigator.nvim----
-local w = require 'wezterm'
-local a = w.action
 
 local function is_inside_vim(pane)
   local tty = pane:get_tty_name()
   if tty == nil then return false end
-
-  local success, stdout, stderr = w.run_child_process
+  local success, stdout, stderr = wezterm.run_child_process
     { 'sh', '-c',
-      'ps -o state= -o comm= -t' .. w.shell_quote_arg(tty) .. ' | ' ..
+      'ps -o state= -o comm= -t' .. wezterm.shell_quote_arg(tty) .. ' | ' ..
       'grep -iqE \'^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?)(diff)?$\'' }
-
   return success
 end
 
@@ -49,8 +47,7 @@ local function bind_if(cond, key, mods, action)
       win:perform_action(a.SendKey({key=key, mods=mods}), pane)
     end
   end
-
-  return {key=key, mods=mods, action=w.action_callback(callback)}
+  return {key=key, mods=mods, action=wezterm.action_callback(callback)}
 end
 
 --Shortcuts
@@ -71,9 +68,9 @@ config.keys = {
     action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
   },
   --Nvim navigator
-    bind_if(is_outside_vim, 'h', 'CTRL', a.ActivatePaneDirection('Left')),
-    bind_if(is_outside_vim, 'l', 'CTRL', a.ActivatePaneDirection('Right')),
-    bind_if(is_outside_vim, 'j', 'CTRL', a.ActivatePaneDirection('Up')),
-    bind_if(is_outside_vim, 'k', 'CTRL', a.ActivatePaneDirection('Down')),
+    bind_if(is_outside_vim, 'h', 'CTRL', wezterm.action.ActivatePaneDirection('Left')),
+    bind_if(is_outside_vim, 'l', 'CTRL', wezterm.action.ActivatePaneDirection('Right')),
+    bind_if(is_outside_vim, 'j', 'CTRL', wezterm.action.ActivatePaneDirection('Up')),
+    bind_if(is_outside_vim, 'k', 'CTRL', wezterm.action.ActivatePaneDirection('Down')),
 }
 return config
