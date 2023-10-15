@@ -54,19 +54,23 @@ local function bind_if(cond, key, mods, action)
 end
 
 -- return {
---   keys = {
---     bind_if(is_outside_vim, 'h', 'ALT', a.ActivatePaneDirection('Left')),
+--   keys = { bind_if(is_outside_vim, 'h', 'ALT', a.ActivatePaneDirection('Left')),
 --     bind_if(is_outside_vim, 'l', 'ALT', a.ActivatePaneDirection('Right')),
 --   },
 -- }
 
---Shortcuts
+config.leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
-  -- {
-  --   key = "l",
-  --   mods = "ALT",
-  --   action = wezterm.action.ClearScrollback 'ScrollbackOnly',
-  -- },
+  {
+    key = "UpArrow",
+    mods = "LEADER",
+    action = wezterm.action.AdjustPaneSize{'Up',5},
+  },
+  {
+    key = "DownArrow",
+    mods = "LEADER",
+    action = wezterm.action.AdjustPaneSize{'Down',5},
+  },
   {
     key = "\\",
     mods = "ALT",
