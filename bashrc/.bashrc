@@ -182,3 +182,4 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 clear
+neofetch

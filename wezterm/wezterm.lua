@@ -24,16 +24,18 @@ config.window_decorations = "RESIZE"
 -- tab_bar flase renders it in a retro aesthetic using the main terminal font.
 config.use_fancy_tab_bar= false
 
-
-----Setup Navigator.nvim----
+local w = require 'wezterm'
+local a = w.action
 
 local function is_inside_vim(pane)
   local tty = pane:get_tty_name()
   if tty == nil then return false end
-  local success, stdout, stderr = wezterm.run_child_process
+
+  local success, stdout, stderr = w.run_child_process
     { 'sh', '-c',
-      'ps -o state= -o comm= -t' .. wezterm.shell_quote_arg(tty) .. ' | ' ..
+      'ps -o state= -o comm= -t' .. w.shell_quote_arg(tty) .. ' | ' ..
       'grep -iqE \'^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?)(diff)?$\'' }
+
   return success
 end
 
@@ -47,8 +49,16 @@ local function bind_if(cond, key, mods, action)
       win:perform_action(a.SendKey({key=key, mods=mods}), pane)
     end
   end
-  return {key=key, mods=mods, action=wezterm.action_callback(callback)}
+
+  return {key=key, mods=mods, action=w.action_callback(callback)}
 end
+
+-- return {
+--   keys = {
+--     bind_if(is_outside_vim, 'h', 'ALT', a.ActivatePaneDirection('Left')),
+--     bind_if(is_outside_vim, 'l', 'ALT', a.ActivatePaneDirection('Right')),
+--   },
+-- }
 
 --Shortcuts
 config.keys = {
@@ -70,7 +80,7 @@ config.keys = {
   --Nvim navigator
     bind_if(is_outside_vim, 'h', 'CTRL', wezterm.action.ActivatePaneDirection('Left')),
     bind_if(is_outside_vim, 'l', 'CTRL', wezterm.action.ActivatePaneDirection('Right')),
-    bind_if(is_outside_vim, 'j', 'CTRL', wezterm.action.ActivatePaneDirection('Up')),
-    bind_if(is_outside_vim, 'k', 'CTRL', wezterm.action.ActivatePaneDirection('Down')),
+    bind_if(is_outside_vim, 'k', 'CTRL', wezterm.action.ActivatePaneDirection('Up')),
+    bind_if(is_outside_vim, 'j', 'CTRL', wezterm.action.ActivatePaneDirection('Down')),
 }
 return config
