@@ -88,12 +88,10 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias lg='ls -lG --color --group-directories-first -A -v'
-#Sort by type(folder or file) and hidden/not-hidden
-alias ds='du -sk * | sort -nr'
+alias ll='ls -lG --color --group-directories-first -A -v'  #Most used
+alias lh='ls -alF'					   #Hidden items
+alias ls='ld -lCF'					   #Directories
+alias ds='du -sk * | sort -nr'				   #Sort by size
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -123,6 +121,7 @@ fi
 #------------------------------------#
 
 alias pys="conda activate pys"
+alias qtc="pys && jupyter qtconsole --style monokai --IPythonWidget.font_size 9"
 alias pysout="conda deactivate"
 alias condaup="conda update -n base -c defaults conda -y"
 alias pysup="pys && conda update -y --all && pysout"
