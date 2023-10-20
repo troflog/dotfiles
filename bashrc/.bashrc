@@ -90,7 +90,7 @@ fi
 # some more ls aliases
 alias ll='ls -lG --color --group-directories-first -A -v'  #Most used
 alias lh='ls -alF'					   #Hidden items
-alias ls='ld -lCF'					   #Directories
+alias ld='ls -ld */'					   #Directories
 alias ds='du -sk * | sort -nr'				   #Sort by size
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
