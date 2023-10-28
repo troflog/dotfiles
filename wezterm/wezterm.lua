@@ -7,6 +7,17 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+--Border
+config.window_frame = {
+  border_left_width = '0.2cell',
+  border_right_width = '0.2cell',
+  border_bottom_height = '0.1cell',
+  border_top_height = '0.1cell',
+  border_left_color = 'grey',
+  border_right_color = 'grey',
+  border_bottom_color = 'grey',
+  border_top_color = 'grey',
+}
 --Fonts 
 config.font = wezterm.font 'JetBrains Mono'
 config.font_size = 9
