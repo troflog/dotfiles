@@ -125,7 +125,8 @@ alias qtc="pys && jupyter qtconsole --style monokai --IPythonWidget.font_size 9"
 alias pysout="conda deactivate"
 alias condaup="conda update -n base -c defaults conda -y"
 alias pysup="pys && conda update -y --all && pysout"
-alias pcupdate="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y && condaup && pysup"
+alias nodeup="nvm install node"
+alias pcupdate="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y && nodeup && condaup && pysup"
 
 alias vim="nvim"
 alias ipys="pys && ipython"
@@ -179,6 +180,8 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
+#
+#Autocomplete for conda
+eval "$(register-python-argcomplete conda)"
 clear
 neofetch

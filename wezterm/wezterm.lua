@@ -6,7 +6,6 @@ local config = {}
 if wezterm.config_builder then
   config = wezterm.config_builder()
 end
-
 --Border
 config.window_frame = {
   border_left_width = '0.2cell',
@@ -64,12 +63,9 @@ local function bind_if(cond, key, mods, action)
   return {key=key, mods=mods, action=w.action_callback(callback)}
 end
 
--- return {
---   keys = { bind_if(is_outside_vim, 'h', 'ALT', a.ActivatePaneDirection('Left')),
---     bind_if(is_outside_vim, 'l', 'ALT', a.ActivatePaneDirection('Right')),
---   },
--- }
+--- Key mappings 
 
+--Set leader key
 config.leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
   {
