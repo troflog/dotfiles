@@ -154,7 +154,7 @@ nvims() {
   NVIM_APPNAME=$config nvim $@
 }
 
-bind -x '"\C-a": nvims'
+bind -x '"\C-.": nvims'
 bind -x '"\el": clear'
 #Autojump
 
@@ -185,3 +185,4 @@ unset __conda_setup
 eval "$(register-python-argcomplete conda)"
 clear
 neofetch
+. "$HOME/.cargo/env"
