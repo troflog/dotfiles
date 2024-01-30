@@ -53,12 +53,12 @@ local direction_keys = {
 local function split_nav(resize_or_move, key)
   return {
     key = key,
-    mods = resize_or_move == 'resize' and 'META' or 'CTRL',
+    mods = resize_or_move == 'resize' and 'SUPER' or 'META',
     action = w.action_callback(function(win, pane)
       if is_vim(pane) then
         -- pass the keys through to vim/nvim
         win:perform_action({
-          SendKey = { key = key, mods = resize_or_move == 'resize' and 'META' or 'CTRL' },
+          SendKey = { key = key, mods = resize_or_move == 'resize' and 'SUPER' or 'META' },
         }, pane)
       else
         if resize_or_move == 'resize' then
@@ -81,6 +81,16 @@ config.keys = {
     key = 't',
     mods = 'SHIFT|ALT',
     action = act.SpawnTab 'CurrentPaneDomain',
+  },
+  {
+    key = "RightArrow",
+    mods = "LEADER",
+    action = wezterm.action.AdjustPaneSize{'Right',5},
+  },
+  {
+    key = "LeftArrow",
+    mods = "LEADER",
+    action = wezterm.action.AdjustPaneSize{'Left',5},
   },
   {
     key = "UpArrow",
@@ -108,11 +118,11 @@ config.keys = {
     split_nav('move', 'k'),
     split_nav('move', 'l'),
     -- resize panes
-    split_nav('resize', 'h'),
-    split_nav('resize', 'j'),
-    split_nav('resize', 'k'),
-    split_nav('resize', 'l')
-
+    -- split_nav('resize', 'h'),
+    -- split_nav('resize', 'j'),
+    -- split_nav('resize', 'k'),
+    -- split_nav('resize', 'l')
+    --
 }
 --Remote test
 config.ssh_domains = {
