@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
+local act = wezterm.action
 -- This table will hold the configuration.
 local config = {}
 -- In newer versions of wezterm, use the config_builder which will help provide clearer error messages
@@ -42,7 +43,6 @@ local function is_vim(pane)
   return pane:get_user_vars().IS_NVIM == 'true'
 end
 
-
 local direction_keys = {
   h = 'Left',
   j = 'Down',
@@ -77,6 +77,11 @@ end
 --Set leader key
 config.leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
+  {
+    key = 't',
+    mods = 'SHIFT|ALT',
+    action = act.SpawnTab 'CurrentPaneDomain',
+  },
   {
     key = "UpArrow",
     mods = "LEADER",

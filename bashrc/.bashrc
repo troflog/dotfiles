@@ -141,6 +141,13 @@ export PATH="/home/tbf/lua-language-server/bin:$PATH"
 
 alias luamake=/home/tbf/ubuntu-setup/lua-language-server/3rd/luamake/luamake
 
+#Start neovim remote
+remote_vim (){
+    ssh -L 6666:localhost:6666 $1 nvim --headless --listen localhost:6666
+}
+alias connect_remote_vim="nvim --server localhost:6666 --remote-ui"
+
+
 nvims() {
   items=("default" "astrovim" "kickstart" "lazyvim" "kicker") # "NvChad" "LazyVim" "tbf" "nkt" "KickStart")
   #config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
@@ -153,9 +160,8 @@ nvims() {
   fi
   NVIM_APPNAME=$config nvim $@
 }
-
-bind -x '"\C-.": nvims'
-bind -x '"\el": clear'
+#bind -x '"\ex":"nvims"'
+bind -x '"\er":"clear"'
 #Autojump
 
 if [ -f "/usr/share/autojump/autojump.sh" ]; then
@@ -165,6 +171,7 @@ elif [ -f "/usr/share/autojump/autojump.bash" ]; then
 else
 	echo "can't found the autojump script"
 fi
+
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
