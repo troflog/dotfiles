@@ -88,7 +88,8 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -lG --color --group-directories-first -A -v'  #Most used
+alias ll='ls -lhs'
+alias lk='ls -lG --color --group-directories-first -A -v'  #Most details
 alias lh='ls -alF'					   #Hidden items
 alias ld='ls -ld */'					   #Directories
 alias ds='du -sk * | sort -nr'				   #Sort by size
@@ -129,6 +130,8 @@ alias nodeup="nvm install node"
 alias pcupdate="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y && nodeup && condaup && pysup"
 
 alias vim="nvim"
+alias vi="nvim"
+alias v="nvim"
 alias ipys="pys && ipython"
 alias qtco="pys && jupyter qtconsole"
 

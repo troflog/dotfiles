@@ -1,0 +1,24 @@
+#Themes
+import = [
+    "~/.config/alacritty/themes/themes/tokyo-night.toml"
+    ]
+
+[font]
+size = 9.0
+
+[font.bold]
+family = "monospace"
+style = "Bold"
+
+[font.bold_italic]
+family = "monospace"
+style = "Bold Italic"
+
+[font.italic]
+family = "monospace"
+style = "Italic"
+
+[font.normal]
+family = "monospace"
+style = "Regular"
+
