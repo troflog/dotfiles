@@ -196,3 +196,4 @@ eval "$(register-python-argcomplete conda)"
 clear
 neofetch
 . "$HOME/.cargo/env"
+eval "$(starship init bash)"
