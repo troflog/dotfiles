@@ -194,6 +194,6 @@ unset __conda_setup
 #Autocomplete for conda
 eval "$(register-python-argcomplete conda)"
 clear
-neofetch
+#neofetch
 . "$HOME/.cargo/env"
 eval "$(starship init bash)"
