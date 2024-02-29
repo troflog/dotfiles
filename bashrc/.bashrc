@@ -124,7 +124,7 @@ fi
 alias pys="conda activate pys"
 alias qtc="pys && jupyter qtconsole --style monokai --IPythonWidget.font_size 9"
 alias pysout="conda deactivate"
-alias condaup="conda update -n base -c defaults conda -y"
+alias condaup="conda update -n base -c defaults conda -y && conda update -y --all"
 alias pysup="pys && conda update -y --all && pysout"
 alias nodeup="nvm install node"
 alias pcupdate="sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y && nodeup && condaup && pysup"
@@ -152,8 +152,7 @@ alias connect_remote_vim="nvim --server localhost:6666 --remote-ui"
 
 
 nvims() {
-  items=("default" "astrovim" "kickstart" "lazyvim" "kicker") # "NvChad" "LazyVim" "tbf" "nkt" "KickStart")
-  #config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  items=("default" "astrovim" "kickstart" "lazyvim" )
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"
@@ -163,7 +162,7 @@ nvims() {
   fi
   NVIM_APPNAME=$config nvim $@
 }
-#bind -x '"\ex":"nvims"'
+bind -x '"\ex":"nvims"'
 bind -x '"\er":"clear"'
 #Autojump
 
@@ -178,14 +177,14 @@ fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/tbf/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/troflog/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/tbf/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/tbf/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/troflog/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/troflog/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/tbf/miniconda3/bin:$PATH"
+        export PATH="/home/troflog/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
